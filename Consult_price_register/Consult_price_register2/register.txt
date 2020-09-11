@@ -1,0 +1,12 @@
+Corn
+500
+Gala
+100
+Coke
+50
+Rice
+500
+Garri
+350
+Water
+10

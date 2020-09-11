@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1543927412 source:d:\c & c++ projects\consult_price_register\code_generator_n_tester\main.c
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+

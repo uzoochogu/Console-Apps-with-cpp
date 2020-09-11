@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1540805599 source:d:\c & c++ projects\consult_price_register\consult_price_register2\main.cpp
+	<iostream>
+	<fstream>
+	<cstdio>
+	<string>
+	<cstdlib>
+	<windows.h>
+	<iomanip>
+

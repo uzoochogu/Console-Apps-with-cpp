@@ -1,0 +1,6 @@
+Gala
+50
+Coke
+100
+Melon
+100
