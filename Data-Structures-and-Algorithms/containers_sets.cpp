@@ -5,6 +5,13 @@
 #include <algorithm>
 #include <chrono>
 
+/*
+Sets implements a collection of unique elements
+The elements are sorted using comparison operators 
+native to the DataType or overloaded operators
+
+no push_back() but just insert() methods
+*/
 
 int main()
 {

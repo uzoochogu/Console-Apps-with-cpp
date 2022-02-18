@@ -5,6 +5,12 @@
 #include <algorithm>
 #include <chrono>
 
+/*
+
+Double ended queue has the insertion speed of a list and random access or indexable speed of a vector or array. 
+It can be considered as a linked list of arrays
+
+*/
 
 int main()
 {

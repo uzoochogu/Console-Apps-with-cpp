@@ -5,6 +5,12 @@
 #include <algorithm>
 #include <chrono>
 
+/*
+Sets implements a collection of unique elements
+The elements are not sorted and uses 
+hashes to implement uniqueness
+*/
+
 
 int main()
 {

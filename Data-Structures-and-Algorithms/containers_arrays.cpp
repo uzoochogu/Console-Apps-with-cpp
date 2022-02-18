@@ -4,6 +4,14 @@
 #include <array>
 #include <algorithm>
 
+/*
+
+	This implements an array but with function from the std library like iterators and algorithms found in <algorithm>
+	It doesn't support dynamic allocation.
+
+
+*/
+
 
 int something()
 {
