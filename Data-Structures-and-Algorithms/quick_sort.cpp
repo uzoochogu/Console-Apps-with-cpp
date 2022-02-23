@@ -17,13 +17,15 @@
 */
 
 
-// A utility function to swap two elements
+/* //A utility function to swap two elements, we'll use std::swap
 void swap(int* a, int* b)
 {
     int t = *a;
     *a = *b;
     *b = t;
 }
+
+*/
 
 
 //The partition function
@@ -41,7 +43,7 @@ int partition(int arr[], int start, int end)
 
     //Give pivot element the correct position
     int pivotIndex = start + count;
-    swap(&arr[pivotIndex], &arr[start]);
+    std::swap(arr[pivotIndex], arr[start]);
 
     /* Sorting the left and right parts of the pivot elements
     it swaps once it meets an element on the left greater than pivot
@@ -57,11 +59,11 @@ int partition(int arr[], int start, int end)
         }
         while(arr[j] > pivot)
         {
-            j++;
+            j--;
         }
         if(i < pivotIndex && j > pivotIndex)
         {
-            swap(&arr[i++], &arr[j--]);
+            std::swap(arr[i++], arr[j--]);
         }
     }
     return pivotIndex;
