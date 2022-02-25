@@ -1,105 +1,96 @@
 #include <iostream>
 using namespace std;
 
-/*
-We would implement the following operations:
-1. appendNode()
-2. prependNode()
-3. insertNodeAfter()
-4. deleteNodeByKey()
-5. updateNodeByKey()
-6. print()
-*/
 
-
-//Node Class
 class Node
 {
     public:
         int key;
         int data;
         Node* next;
+        Node* previous;
 
-    Node()
-    {
-        key=0;
-        data=0;
-        next = NULL;
-    }
-    Node(int k, int d)
-    {
-        key = k;
-        data = d;
-    }  
+        Node()
+        {
+            key=0;
+            data=0;
+            next=NULL;
+            previous=NULL;
+        }
+
+        Node(int k, int d)
+        {
+            key=k;
+            data=d;
+        }
 
 };
 
-
-// Singly linked list class
-class SinglyLinkedList
+class DoublyLinkedList
 {
     public:
         Node* head;
 
-        SinglyLinkedList()
+        DoublyLinkedList()
         {
-            head = NULL;;
+            head=NULL;
         }
 
-        SinglyLinkedList(Node *n)
+        DoublyLinkedList(Node *n)
         {
-            head = n;
+            head=n;
         }
 
-        //Check if node exists using key value
-        Node* nodeExists(int k) 
+        //1. Check if the Node Exists using Key value.
+        Node* nodeExists(int k)
         {
-            Node* temp =NULL;
-
+            Node* temp = NULL;
             Node* ptr = head;
 
-            while(ptr != NULL)
+            while(ptr!=NULL)
             {
-                if(ptr->key == k)
+                if(ptr->key==k)
                 {
-                    temp = ptr; 
+                    temp=ptr;
                 }
-                ptr = ptr->next;
+                ptr=ptr->next; 
             }
-            return temp; 
+
+            return temp;
         }
 
-        //Appends a node to the list, we append at the end
-        void appendNode(Node *n)
+
+        //2. Append a node to the list
+
+        void appendNode(Node* n)
         {
-            if(nodeExists(n->key) != NULL) //same key exists
+            if(nodeExists(n->key)!=NULL)
             {
                 cout << "Node already exists with key value: " << n->key  
                 << ". Append another node with different Key value" << endl;
             }
             else
             {
-                if(head==NULL) //No linked list
+                if(head == NULL)
                 {
-                    head= n;
+                    head = n;
                     cout << "Node Appended as Head Node" << endl;
                 }
                 else
                 {
                     Node* ptr = head;
-                    while(ptr->next!=NULL)
+                    while(ptr->next!=NULL) //iterate to the tail node
                     {
                         ptr = ptr->next;
                     }
-
-                    ptr->next = n;
-                    cout << "Node Appended" << endl;
+                    ptr->next=n;
+                    n->previous = ptr; //Doubly Linked List so we connect to previous node
+                    cout << "Node Appended" <<endl;
                 }
             }
-        }
+        } 
 
-
-        //Prepend a node to the list - we attach a node to the start
+        //3. Prepend Node - Attach a node at the start
         void prependNode(Node* n)
         {
             if(nodeExists(n->key) != NULL) //same key exists
@@ -116,130 +107,153 @@ class SinglyLinkedList
                 }
                 else
                 {
+                    head->previous=n;
                     n->next=head;
+
                     head = n;
                     cout << "Node Prepended" << endl;
-                }                
+                }
+                
             }
         }
 
-
-        //Insert a Node after a particular node in the list
-        void insertNodeAfter (int k, Node *n)
+        //4. Insert a Node after a particular node in the list
+        void insertNodeAfter(int k, Node *n)
         {
             Node* ptr = nodeExists(k); //store the location to insert after
             if(ptr==NULL) //Insert point does not exist
             {
-                cout <<"No node exists with key value: " << k << endl;
+                cout<<"No node exists with key value: "<<k<<endl;
             }
             else
             {
-                if(nodeExists(n->key) != NULL)  //same key exists
+                if(nodeExists(n->key) != NULL) //same key exists
                 {
                     cout << "Node already exists with key value: " << n->key  
-                    << ". Insert another node with different Key value" << endl;
+                    << ". Append another node with different Key value" << endl;
                 }
                 else
                 {
-                    n->next = ptr->next;
-                    ptr->next=n;
-                    cout << "Node Inserted" << endl;
+                    cout << "INSERTING" <<endl;
+
+                    Node* nextNode = ptr->next;
+
+                    //Inserting at the end -> append
+                    if(nextNode==NULL)
+                    {
+                        ptr->next=n;
+                        n->previous=ptr;
+                        cout<<"Node Inserted at the END"<<endl;
+                    }
+
+                    //inserting in between
+                    else
+                    {
+                        n->next=nextNode;
+                        nextNode->previous=n;
+
+                        n->previous=ptr;
+                        ptr->next=n;
+
+                        cout<< "Node Inserted in Between" <<endl;
+                    }
                 }
             }
         }
 
-        //Delete Node by unique key
+        //5. Deleting a Node by unique key. Delinking (Not deleting)
         void deleteNodeByKey(int k)
         {
             if(head==NULL)
             {
-                cout << "Singly Linked List already empty, Can't delete" << endl;                
+                 cout << "Doubly Linked List already empty, Can't delete" << endl;
+            }
+            Node* ptr = nodeExists(k); //iterates and return the node with key or null
+            if(ptr==NULL)
+            {
+                cout << "No node exists with key value: "<<k<<endl;
             }
             else
             {
                 if(head->key==k)
                 {
-                    head = head->next;
-                    cout << "Node UNLINKED with key value: " <<k<<endl;
+                    head = head->next; //unlinked the previous head node not deleted
+                    cout << "Node UNLINKED with keys value : "<<k<<endl;
                 }
                 else
                 {
-                    Node* temp=NULL;
-                    Node* prevptr=head;
-                    Node*  currentptr = head->next;
-                    while(currentptr != NULL) //while not the tail node or we have a match
-                    {
-                        if(currentptr->key==k) //check for match
-                        {
-                            temp = currentptr;
-                            currentptr=NULL;
-                        }
+                    //Old implementation used extra pointers to store these. There are not needed
+                    //Uncomment line with //* for old implementation
+                    //* Node* nextNode = ptr->next;
+                    //* Node* prevNode = ptr->previous;
 
-                        else //no match keep going
-                        {
-                            prevptr = prevptr->next;
-                            currentptr = currentptr->next;
-                        }
-                    }
-
-                    if(temp !=NULL)
+                    //Deleting at the end
+                    if(ptr->next == NULL) //We are at the tail node
                     {
-                        prevptr->next=temp->next;
-                        cout << "Node UNLINKED with key value: " <<k<<endl;
+                        //* prevNode->next= NULL; 
+                        (ptr->previous)->next = NULL; 
+                        cout<<"Node DELETED(UNLINKED) at the END"<<endl;
                     }
+                    //deleting in between
                     else
                     {
-                        cout << "Node Doesn't exist with key vlaue: "<<k<<endl;
+                        //* prevNode->next=nextNode;
+                        //* nextNode->previous=prevNode;
+
+                        (ptr->previous)->next = ptr->next;   //we use the pointers to access the nodes directly                      
+                        (ptr->next)->previous = ptr->previous;
+                        cout<<"Node DELETED(UNLINKED) in-between" <<endl;
                     }
                 }
+
             }
         }
 
-
-        //Update node by key
+        //6. Update Node
         void updateNodeByKey(int k, int d)
         {
-            Node* ptr = nodeExists(k);
+            Node* ptr = nodeExists(k); //iterates through the list
             if(ptr!=NULL)
             {
-                ptr->data = d;
-                cout << "Node Data updated successfully"<<endl;
+                ptr->data=d;
+                cout<<"Node Data Updated Successfully"<<endl;
             }
             else
             {
-                cout<<"Node doesn't exist with key value: "<<k<<endl;
+                cout<<"Node Doesn't exist with key value : "<<k<<endl;
             }
         }
 
-        //Printing of the SinglyLinkedList 
+        //7. Printing
         void printList()
         {
             if(head==NULL)
             {
-                cout << "No Nodes in singly Linked List";
+                cout << "No Node in Doubly Linked List";
             }
             else
             {
-                cout << endl << "Singly Linked List values:  ";
+                cout << endl << "Doubly Linked List values:  ";
                 Node* temp = head;
 
                 while(temp!=NULL)
                 {
-                    cout << "(" <<temp->key<<","<<temp->data<<") --> ";
+                    cout << "(" <<temp->key<<", "<<temp->data<<") <==> ";
                     temp = temp->next;
                 }
-            }
 
+            }
             cout <<endl;
         }
-
+        
 
 };
 
+
 int main()
 {
-    //We'll use this menu driven program to test the SinglyLinkedList
-     SinglyLinkedList sll;
+    //We'll use this to test the DoublyLinkedList
+     DoublyLinkedList dll;
 
      int option;
      int key1,k1,data1;
@@ -267,7 +281,7 @@ int main()
                 cin>>data1;
                 n1->key=key1;
                 n1->data=data1;
-                sll.appendNode(n1);
+             dll.appendNode(n1);
                 break;
 
             case 2:
@@ -276,7 +290,7 @@ int main()
                 cin>>data1;
                 n1->key=key1;
                 n1->data=data1;
-                sll.prependNode(n1);
+             dll.prependNode(n1);
                 break;
 
             case 3:
@@ -289,13 +303,13 @@ int main()
                 cin>>data1;
                 n1->data=data1;
 
-                sll.insertNodeAfter(k1, n1);
+             dll.insertNodeAfter(k1, n1);
                 break;
 
             case 4:
                 cout<<"Delete Node By Key Operation - \nEnter key of the Node to be deleted: "<<endl;
                 cin>>k1;
-                sll.deleteNodeByKey(k1);
+             dll.deleteNodeByKey(k1);
 
                 break;
             
@@ -304,12 +318,12 @@ int main()
                 cin >> key1;
                 cout<<"Data: ";
                 cin>> data1;
-                sll.updateNodeByKey(key1,data1);
+             dll.updateNodeByKey(key1,data1);
 
                 break;
 
             case 6:
-                sll.printList();
+             dll.printList();
 
                 break;
             case 7:
@@ -324,6 +338,7 @@ int main()
 
         }
      } while (option !=0);
+
 
     return 0;
 }
