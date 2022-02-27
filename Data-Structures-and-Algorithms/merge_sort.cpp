@@ -26,73 +26,65 @@ void merge(int arr[], int l, int m, int r)
     int j=m+1; //starting index for right subarray
     int k=l;  //starting index for result temporary vector (not needed in a vector)
 
-    int temp[sizeof(arr)/sizeof(arr[0])]; //we create an array that'll fit the element size 
-    //std::vector <int> temp; //temp vector;
+    //int* temp = new int[(l-r) + 1]; //we create a temp array that'll fit the element size 
+    std::vector <int> temp; //temp vector;
 
     while(i<=m && j <=r) //Bounds the iteration
     {
         if(arr[i] <= arr[j]) //arr[i] is smaller
         {
-            temp[k] = arr[i];
-            //temp.push_back(arr[i]);  
-            i++; //we can't compare the left value again
-            k++; //we move to next position in array/vector
+            //temp[k] = arr[i];
+            temp.push_back(arr[i]);  
+            i++; //we can't compare the left value again  
         }
         else //arr[j] is smaller
         {
-            temp[k] = arr[j];
-            //temp.push_back(arr[j]); 
+            //temp[k] = arr[j];
+            temp.push_back(arr[j]); 
             j++;
-            k++;
-        }    
+        } 
+        //k++; //we move to next position in array/vector   
     }
 
     //When split arrays are not equal, and the arrays have unaccessed elements
     while(i<=m)
     {
         //copying all remaining elements in left array
-        temp[k] = arr[i]; 
-        //temp.push_back(arr[i]); 
+        //temp[k] = arr[i]; 
+        temp.push_back(arr[i]); 
         i++;
-        k++;
+        //k++;
     }
 
     while(j<=r)
     {
         //copying all remaining elements in right array
-        temp[k] = arr[j]; 
-        //temp.push_back(arr[j]); 
+        //temp[k] = arr[j]; 
+        temp.push_back(arr[j]); 
         j++;
-        k++;
+        //k++;
     }
 
     //copy elements from temp vector to original array
     for(int s=l; s <= r; s++) 
     {
-        arr[s] = temp[s];
+        arr[s] = temp[s-l]; //s-l gives the index for the function stack local vector
     }
-
-    /* //for Vector
-    for(int s=l; s <= r; s++) 
-    {
-        arr[s] = temp.at(s);
-    } */
-
 }
 
 
 //merge sort function
-void mergeSort(int arr[], int l, int r)
+void mergeSort(int arr[], int begin, int end)
 {
-    if(l < r) //This is False if the array has one element (Splitting is complete)
+    if(begin < end) //This is False if the array has one element (Splitting is complete)
     {
-        int m = (l + r)/2; //midpoint
+        int m = (begin + end)/2; //midpoint
 
-        mergeSort(arr,l,m); //sort the left side of each split
+        mergeSort(arr,begin,m); //sort the left side of each split
 
-        mergeSort(arr,m+1, r); //sort the right side of each split
+        mergeSort(arr,m+1, end); //sort the right side of each split
 
-        merge(arr,l,m,r);
+        merge(arr,begin,m,end);
     }
 
 }
