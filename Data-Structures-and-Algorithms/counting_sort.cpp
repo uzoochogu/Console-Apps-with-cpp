@@ -59,13 +59,16 @@ void countingSort(int input_array[], int s, int r)
 int main()
 {
     int size =0;
-    int range = 10; //we are keeping it simple here, a range of 0-9
+    int range = 10; 
 
     cout << "Enter Size of the array: "<<endl;
     cin>>size;
     int* myarray = new int[size]; 
 
-    cout << "Enter " << size << " integers in any order in the range of 0-9: "
+    cout << "Enter Range of the array: "<<endl;
+    cin>>range;
+
+    cout << "Enter " << size << " integers in any order in the range of 0-" << range <<": "
     <<endl;
     for(int i=0; i<size; i++)
     {
