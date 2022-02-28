@@ -60,10 +60,10 @@ int main()
     cin>>size;
     int* myarray = new int[size]; 
 
-    cout << "Enter Range of the array (0-range): "<<endl;
+    cout << "Enter Range of the array from 0-range(exclusive): "<<endl;
     cin>>range;
 
-    cout << "Enter " << size << " integers in any order in the range of 0-" << range <<": "
+    cout << "Enter " << size << " integers in any order in the range of 0-" << range <<"(exclusive): "
     <<endl;
     for(int i=0; i<size; i++)
     {
@@ -73,7 +73,7 @@ int main()
     cout << endl << "Before Sorting" << endl;
     for(int i=0; i<size; i++)
     {
-        cout << myarray[i];
+        cout << myarray[i] << " ";
     }
 
     countingSort(myarray, size, range); //function call
