@@ -17,13 +17,8 @@ Space complexity of O(k)
 void countingSort(int input_array[], int s, int r)
 {
     int* output_array= new int[s];
-    int* count_array= new int[r];
-
-    for(int i=0; i<r; i++)
-    {
-        count_array[i]=0; //fill count array with 0
-    }
-
+    int* count_array= new int[r] {0}; //create array dynamically and fill with 0
+    
     //we count occurences for each value in the input array
     for(int i=0; i<s; i++) //iterate within size of input array
     {
@@ -33,7 +28,7 @@ void countingSort(int input_array[], int s, int r)
     //Get cummulative count array to store positional values for output array
     for(int i=1; i<r; i++) //start from the second element
     {
-        count_array[i]= count_array[i] + count_array[i-1];
+        count_array[i] += count_array[i-1];
     }
 
     //Extract using cumulative count array values from input array to output array
@@ -65,7 +60,7 @@ int main()
     cin>>size;
     int* myarray = new int[size]; 
 
-    cout << "Enter Range of the array: "<<endl;
+    cout << "Enter Range of the array (0-range): "<<endl;
     cin>>range;
 
     cout << "Enter " << size << " integers in any order in the range of 0-" << range <<": "
