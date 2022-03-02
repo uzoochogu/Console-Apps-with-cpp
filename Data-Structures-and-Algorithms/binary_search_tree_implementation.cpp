@@ -40,7 +40,54 @@ class BST
                 return false;
         }
 
+
+        void insertNode(TreeNode * new_node) 
+        {
+            if (root == NULL) 
+            {
+                root = new_node;
+                cout << "Value Inserted as root node!" << endl;
+            } 
+            else
+            {
+                TreeNode * temp = root;
+                while (temp != NULL) 
+                {
+                    if (new_node -> value == temp -> value) 
+                    {
+                        cout << "Value Already exist," <<
+                        "Insert another value!" << endl;
+                        return;
+                    } 
+                    else if ((new_node -> value < temp -> value) && (temp -> left == NULL)) 
+                    {
+                        temp -> left = new_node;
+                        cout << "Value Inserted to the left!" << endl;
+                        break;
+                    } 
+                    else if (new_node -> value < temp -> value) 
+                    {
+                        temp = temp -> left;
+                    } 
+                    else if ((new_node -> value > temp -> value) && (temp -> right == NULL)) 
+                    {
+                        temp -> right = new_node;
+                        cout << "Value Inserted to the right!" << endl;
+                        break;
+                    }
+                    else
+                    {
+                        temp = temp -> right;
+                    }
+                }
+            }
+    
+        }
+
+
 };
+
+
 //Driver code
 int main()
 {
