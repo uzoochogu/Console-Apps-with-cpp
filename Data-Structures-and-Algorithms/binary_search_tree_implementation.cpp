@@ -41,6 +41,7 @@ class BST
         }
 
 
+        //Inserts a node in the binary search tree
         void insertNode(TreeNode * new_node) 
         {
             if (root == NULL) 
@@ -51,7 +52,7 @@ class BST
             else
             {
                 TreeNode * temp = root;
-                while (temp != NULL) 
+                while (temp != NULL) //we traverse 
                 {
                     if (new_node -> value == temp -> value) 
                     {
@@ -82,6 +83,32 @@ class BST
                 }
             }
     
+        }
+
+
+        TreeNode* insertRecursive(TreeNode *r, TreeNode *new_node)
+        {
+            if(r==NULL)
+            {
+                r=new_node;
+                cout <<"Insertion successful"<<endl;
+                return r;
+            }
+        
+            if(new_node->value < r->value)
+            {
+                r->left = insertRecursive(r->left,new_node);
+            }
+            else if (new_node->value > r->value)  
+            {
+                r->right = insertRecursive(r->right,new_node);
+            }
+            else
+            {
+                cout << "No duplicate values allowed!" << endl;
+                return r; 
+            }
+            return r;
         }
 
 
