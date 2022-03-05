@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+#define SPACE 10
+
 
 class TreeNode
 {
@@ -28,7 +30,7 @@ class TreeNode
 class BST
 {
     public:
-        TreeNode *root;
+        TreeNode *root = NULL;
 
 
         //Checks if the BST is empty or not
@@ -41,8 +43,8 @@ class BST
         }
 
 
-        //Inserts a node in the binary search tree
-        void insertNode(TreeNode * new_node) 
+        //Inserts a node in the binary search tree. Iterative Approach. Space Complexity O(n)
+        void insertNode(TreeNode* new_node) 
         {
             if (root == NULL) 
             {
@@ -54,29 +56,32 @@ class BST
                 TreeNode * temp = root;
                 while (temp != NULL) //we traverse 
                 {
-                    if (new_node -> value == temp -> value) 
+                    if (new_node -> value == temp -> value)  //value already exists
                     {
                         cout << "Value Already exist," <<
                         "Insert another value!" << endl;
                         return;
                     } 
-                    else if ((new_node -> value < temp -> value) && (temp -> left == NULL)) 
+                    // insert at left node if empty and the value is less than current node's value
+                    else if ((new_node->value < temp->value) && (temp -> left == NULL))  
                     {
                         temp -> left = new_node;
                         cout << "Value Inserted to the left!" << endl;
                         break;
                     } 
-                    else if (new_node -> value < temp -> value) 
+                    // left node is not empty, but still less than current node's value, keep traversing 
+                    else if (new_node->value < temp->value) 
                     {
                         temp = temp -> left;
                     } 
-                    else if ((new_node -> value > temp -> value) && (temp -> right == NULL)) 
+                    // insert at right node if empty and the value is less than current node's value
+                    else if ((new_node->value > temp->value) && (temp->right == NULL)) 
                     {
                         temp -> right = new_node;
                         cout << "Value Inserted to the right!" << endl;
                         break;
                     }
-                    else
+                    else //keep traversing (right node is not empty, but still less than current node's value)
                     {
                         temp = temp -> right;
                     }
@@ -85,7 +90,7 @@ class BST
     
         }
 
-
+        //Inserts a node in the binary search tree. Recursive Approach.Space complexity O(H) i.e proportional to Height
         TreeNode* insertRecursive(TreeNode *r, TreeNode *new_node)
         {
             if(r==NULL)
@@ -111,6 +116,26 @@ class BST
             return r;
         }
 
+        //Prints the content of the tree in a strucured way. Recursive Approach
+        void print2D(TreeNode * r, int space) 
+        {
+            if (r == NULL) // Base case  1
+            {
+                return;
+            }
+                
+            space += SPACE; // Increase distance between levels   2
+            print2D(r -> right, space); // Process right child first 3 
+            cout << endl;
+            for (int i = SPACE; i < space; i++) // 5 
+            {
+                cout << " "; // 5.1 
+            }
+                 
+            cout << r -> value << "\n"; // 6
+            print2D(r -> left, space); // Process left child  7
+        }
+
 
 };
 
@@ -119,6 +144,11 @@ class BST
 int main()
 {
     int option;
+    int data;
+
+    BST bst;
+    
+
 
     do
     {
@@ -131,7 +161,11 @@ int main()
         cout << "4. Print BST value" <<endl;
         cout << "5. Clear Screen" <<endl; 
 
+        cout << "\n\nOption: ";
+
         cin >> option;
+
+        TreeNode* new_node = new TreeNode();
 
         switch(option)
         {
@@ -140,6 +174,10 @@ int main()
             case 1:
                 cout << "INSERT" << endl;
                 //Insertion code
+                cout << "Please input the value to be stored: " ;
+                cin >> data;
+                new_node->value = data; 
+                bst.insertNode(new_node);
                 break;
 
             case 2:
@@ -153,7 +191,10 @@ int main()
                 break;
             
             case 4:
-                 //Printing code
+                //Printing code
+
+                cout << "Binary Search Tree 2D print:" << endl;
+                bst.print2D(bst.root, 5);
 
                 break;
 
