@@ -137,6 +137,65 @@ class BST
         }
 
 
+        //Prints the content of the Binary Search Tree in a Preorder DFS (Node, Left, Right)
+        void printPreorder(TreeNode *r)
+        {
+            if(r == NULL)
+            {
+                return;
+            }
+
+            //Access the Node First
+            cout << r->value << " ";
+
+            //Access the Left Node 
+            printPreorder(r->left);
+
+            //Access the Right Node
+            printPreorder(r->right);
+        }
+
+
+
+        //Prints the content of the Binary Search Tree in a InOrder DFS (Left, Node, Right)
+        void printInorder(TreeNode *r)
+        {
+            if(r == NULL)
+            {
+                return;
+            }
+
+            //Access the Left Node 
+            printInorder(r->left);
+
+            //Access the Node First
+            cout << r->value << " ";            
+
+            //Access the Right Node
+            printInorder(r->right);
+        }
+
+
+
+        //Prints the content of the Binary Search Tree in a PostOrder DFS (Left, Right, Node)
+        void printPostorder(TreeNode *r)
+        {
+            if(r == NULL)
+            {
+                return;
+            }
+
+            //Access the Left Node 
+            printPostorder(r->left);
+
+            //Access the Right Node
+            printPostorder(r->right);
+
+            //Access the Node First
+            cout << r->value << " ";         
+        }
+
+
 };
 
 
@@ -195,6 +254,22 @@ int main()
 
                 cout << "Binary Search Tree 2D print:" << endl;
                 bst.print2D(bst.root, 5);
+
+                cout << "\n\n\n";
+
+                //DFS Printing Techniques
+                cout << "DFS Printing Techniques:\n";
+                cout << "PreOrder Printing: ";
+                bst.printPreorder(bst.root);
+                cout << "\nInOrder Printing: "; 
+                bst.printInorder(bst.root);
+                cout << "\nPostOrder Printing: ";
+                bst.printPostorder(bst.root);
+
+                //BFS Printing Techniques
+                cout << "\n\nBFS Printing Techniques: \n";
+                
+
 
                 break;
 
