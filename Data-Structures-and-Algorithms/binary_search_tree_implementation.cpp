@@ -196,7 +196,7 @@ class BST
         }
 
 
-        //Searched the Binary Search tree iteratively.
+        //Searches the Binary Search tree iteratively.
         TreeNode* iterativeSearch(int v) 
         {
             if (root == NULL)  //The Tree is empty 
@@ -205,29 +205,30 @@ class BST
             }
             else    
             {
-                TreeNode * temp = root;
+                TreeNode * temp = root; //our investigator pointer
                 while (temp != NULL) 
                 {
                     if (v == temp -> value) 
                     {
                         return temp;
                     } 
-                    else if (v < temp -> value) 
+                    else if (v < temp -> value)  //Go left if search term is less than current node value
                     {
                         temp = temp -> left;
                     } 
-                    else 
+                    else //else go right
                     {
                         temp = temp -> right;
                     }
                 }
-                return NULL;
+                return NULL; //NULL will indicate that it wasn't found
             }
         }
 
-        TreeNode * recursiveSearch(TreeNode* r, int val) 
+        //Searches the Binary Search tree  recursively. Arg: (r)Pointer to Node, (v) search term 
+        TreeNode* recursiveSearch(TreeNode* r, int val)
         {
-            if (r == NULL || r -> value == val)
+            if (r == NULL || r -> value == val) //r will point to the found search term or NULL 
             {
                 return r;
             }              
@@ -244,11 +245,14 @@ class BST
         }
 
 
+
+        /*Height is the number of Edges between tree's root and its furthest leaf. 
+        This function computes the height of a node in a BST.*/
         int height(TreeNode* r) 
         {
             if (r == NULL)
             {
-                return -1;
+                return -1; //Height of an empty tree is designated with -1.
             }
             else 
             {
