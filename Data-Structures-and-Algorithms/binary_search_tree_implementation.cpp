@@ -91,7 +91,7 @@ class BST
         }
 
         //Inserts a node in the binary search tree. Recursive Approach.Space complexity O(H) i.e proportional to Height
-        TreeNode* insertRecursive(TreeNode *r, TreeNode *new_node)
+        TreeNode* insertRecursive(TreeNode* r, TreeNode *new_node)
         {
             if(r==NULL)
             {
@@ -117,7 +117,7 @@ class BST
         }
 
         //Prints the content of the tree in a strucured way. Recursive Approach
-        void print2D(TreeNode * r, int space) 
+        void print2D(TreeNode* r, int space) 
         {
             if (r == NULL) // Base case  1
             {
@@ -138,7 +138,7 @@ class BST
 
 
         //Prints the content of the Binary Search Tree in a Preorder DFS (Node, Left, Right)
-        void printPreorder(TreeNode *r)
+        void printPreorder(TreeNode* r)
         {
             if(r == NULL)
             {
@@ -158,7 +158,7 @@ class BST
 
 
         //Prints the content of the Binary Search Tree in a InOrder DFS (Left, Node, Right)
-        void printInorder(TreeNode *r)
+        void printInorder(TreeNode* r)
         {
             if(r == NULL)
             {
@@ -178,7 +178,7 @@ class BST
 
 
         //Prints the content of the Binary Search Tree in a PostOrder DFS (Left, Right, Node)
-        void printPostorder(TreeNode *r)
+        void printPostorder(TreeNode* r)
         {
             if(r == NULL)
             {
@@ -193,6 +193,115 @@ class BST
 
             //Access the Node First
             cout << r->value << " ";         
+        }
+
+
+        //Searched the Binary Search tree iteratively.
+        TreeNode* iterativeSearch(int v) 
+        {
+            if (root == NULL)  //The Tree is empty 
+            {
+                return root;
+            }
+            else    
+            {
+                TreeNode * temp = root;
+                while (temp != NULL) 
+                {
+                    if (v == temp -> value) 
+                    {
+                        return temp;
+                    } 
+                    else if (v < temp -> value) 
+                    {
+                        temp = temp -> left;
+                    } 
+                    else 
+                    {
+                        temp = temp -> right;
+                    }
+                }
+                return NULL;
+            }
+        }
+
+        TreeNode * recursiveSearch(TreeNode* r, int val) 
+        {
+            if (r == NULL || r -> value == val)
+            {
+                return r;
+            }              
+
+            else if (val < r -> value)
+            {
+                return recursiveSearch(r -> left, val);
+            }
+
+            else
+            {
+                return recursiveSearch(r -> right, val);
+            }
+        }
+
+
+        int height(TreeNode* r) 
+        {
+            if (r == NULL)
+            {
+                return -1;
+            }
+            else 
+            {
+                /* compute the height of each subtree */
+                int lheight = height(r -> left);
+                int rheight = height(r -> right);
+
+                /* use the larger one */
+                if (lheight > rheight)
+                {
+                    return (lheight + 1);
+                }
+                else 
+                {
+                    return (rheight + 1);
+                }
+            }
+        }
+
+        /* Print nodes at a given level */
+        void printGivenLevel(TreeNode* r, int level) 
+        {
+            if (r == NULL)
+            {
+                return;
+            }
+            else if (level == 0)
+            {
+                cout << r -> value << " ";
+            }
+            else // level > 0  
+            {
+                printGivenLevel(r -> left, level - 1);
+                printGivenLevel(r -> right, level - 1);
+            }
+        }
+
+
+        void printLevelOrderBFS(TreeNode* r) 
+        {
+            int h = height(r);
+            for (int i = 0; i <= h; i++)
+            {   
+                printGivenLevel(r, i);
+            }
+        }
+
+
+
+
+        TreeNode* deleteNode(TreeNode* r, int v)
+        {
+
         }
 
 
@@ -268,8 +377,7 @@ int main()
 
                 //BFS Printing Techniques
                 cout << "\n\nBFS Printing Techniques: \n";
-                
-
+                bst.printLevelOrderBFS(bst.root);
 
                 break;
 
