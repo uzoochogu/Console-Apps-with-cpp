@@ -272,14 +272,14 @@ class BST
             }
         }
 
-        /* Print nodes at a given level */
+        /* Print nodes at a given level. Utility function for printLevelOrderBFS(TreeNode* r)*/
         void printGivenLevel(TreeNode* r, int level) 
         {
-            if (r == NULL)
+            if (r == NULL) //Base Case
             {
                 return;
             }
-            else if (level == 0)
+            else if (level == 0) //Only print when you get to the level (i.e level=0)
             {
                 cout << r -> value << " ";
             }
@@ -291,10 +291,11 @@ class BST
         }
 
 
+        /*Prints the nodes of a tree using a Breadth First Search Approach*/
         void printLevelOrderBFS(TreeNode* r) 
         {
             int h = height(r);
-            for (int i = 0; i <= h; i++)
+            for (int i = 0; i <= h; i++) //Prints level by level
             {   
                 printGivenLevel(r, i);
             }
@@ -302,9 +303,11 @@ class BST
 
 
 
-
+        //Delete a node if it exists. Returns deleted node or NULL if not found.
         TreeNode* deleteNode(TreeNode* r, int v)
         {
+            //base case
+            
 
         }
 
@@ -316,7 +319,7 @@ class BST
 int main()
 {
     int option;
-    int data;
+    int data, val;
 
     BST bst;
     
@@ -331,7 +334,8 @@ int main()
         cout << "2. Search Node" <<endl;
         cout << "3. Delete Node" <<endl;
         cout << "4. Print BST value" <<endl;
-        cout << "5. Clear Screen" <<endl; 
+        cout << "5. HEIGHT of Binary Search Tree " <<endl;
+        cout << "6. Clear Screen" <<endl; 
 
         cout << "\n\nOption: ";
 
@@ -353,13 +357,41 @@ int main()
                 break;
 
             case 2:
-                cout << "Search" << endl;
-                //Search code
+                cout << "SEARCH" << endl;
+                cout << "Enter VALUE of TREE NODE to SEARCH in BST: ";
+                cin >> val;
+
+                //Iterative Search
+                cout << "ITERATIVE SEARCH: "; 
+                new_node = bst.iterativeSearch(val);
+                if (new_node != NULL) 
+                {
+                    cout << "Value found" << endl;
+                } 
+                else    
+                {
+                    cout << "Value NOT found" << endl;
+                }
+                
+                //Recursive Search
+                cout << "RECURSIVE SEARCH: "; 
+                new_node = bst.recursiveSearch(bst.root, val);
+                if (new_node != NULL) 
+                {
+                    cout << "Value found" << endl;
+                } 
+                else 
+                {
+                    cout << "Value NOT found" << endl;
+                }
+
                 break;
 
             case 3:
                 cout << "DELETE" << endl;
                 //Deletion code
+
+
                 break;
             
             case 4:
@@ -386,6 +418,11 @@ int main()
                 break;
 
             case 5:
+                cout << "HEIGHT of Binary Search Tree:\n Height:  " << bst.height(bst.root) << endl;
+                break;  
+
+
+            case 6:
                 system("cls"); //For GCC, for Turbo cpp use "clrscr"
                 break;
 
