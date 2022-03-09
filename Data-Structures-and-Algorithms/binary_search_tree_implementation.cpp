@@ -303,10 +303,60 @@ class BST
 
 
 
+        TreeNode* minValueNode(TreeNode* node)
+        {
+            TreeNode* current = node;
+
+            //Loop to get leftmost leaf
+            while(current->left != NULL)
+            {
+                current = current->left;
+            }
+            return current;
+        }
+
+
         //Delete a node if it exists. Returns deleted node or NULL if not found.
         TreeNode* deleteNode(TreeNode* r, int v)
         {
             //base case
+            if(r == NULL)
+            {
+                return r;
+            }
+            else if(v < r->value) //search term smaller, go left
+            {
+                r->left = deleteNode(r->left , v); //We basically disconnect the deleted node
+            }
+            else if(v > r->value) //search term larger, go right
+            {
+                r->right = deleteNode(r->right, v); //We basically disconnect the deleted node
+            }
+            else //When a Match is found
+            {
+                TreeNode* temp = NULL;
+                if(r->left == NULL) //Node only has a right child OR no child
+                {
+                    temp = r->right;
+                    delete r;
+                    return temp;
+                }
+                else if(r->right == NULL) //Node with only left child
+                {
+                    temp = r->left ;
+                    delete r;
+                    return temp;
+                }
+                else //node with TWO children
+                {
+                    temp = minValueNode(r->right);
+                    r->value = temp->value;
+                    r->right = deleteNode(r->right, temp->value);
+
+                }
+            }
+
+            return r; //We return this to relink the nodes the recursive stack
             
 
         }
@@ -391,7 +441,20 @@ int main()
                 cout << "DELETE" << endl;
                 //Deletion code
 
+                cout << "Enter VALUE of Tree Node you want to DELETE in BST: ";
+                cin >> val;
 
+                //Check if Node exists
+                new_node = bst.iterativeSearch(val);
+                if(new_node != NULL)
+                {
+                    bst.deleteNode(bst.root, val);
+                    cout << "Value Deleted" << endl;
+                }
+                else
+                {
+                    cout << "Value NOT found" << endl;
+                }              
                 break;
             
             case 4:
