@@ -33,6 +33,22 @@
 #include <sstream>
 
 
+int numTimesAllBlue(std::vector <int> light)
+{
+    int moment = 0;
+    int max = -1;
+    for(int i= 0 ; i < light.size(); ++i)
+    {
+        max = std::max(light[i], max);
+
+        if(i + 1 == max)
+        {
+            moment++;
+        }
+    }
+    return moment;
+}
+
 
 
 
@@ -41,7 +57,8 @@
 int main()
 {
     int option;
-    std::istringstream oss;
+    std::ostringstream oss;
+    std::istringstream iss;
 
     do
     {
@@ -54,7 +71,7 @@ int main()
 
         std::vector <int> light;
 
-
+        std::string lightInput, buf;
         switch(option)
 
         {
@@ -63,16 +80,30 @@ int main()
             
             case 1:
                 std::cout << "Input the Light Array, input X to end: \n";
-                std::string lightInput;
 
-                   
-                    oss >> lightInput;
+                std::cin.clear();             
+                std::getline(std::cin, lightInput);
 
-                    for(auto c: lightInput)
-                    {
-                        light.push_back(int(c));
+                for(auto c: lightInput)
+                {
+                    light.push_back(int(c));
 
-                    }                
+                }                                
+
+                for(auto c: light)
+                {
+                    std::cout << c;
+
+                }  
+
+                std::cout << "Done Parsing";
+
+                break;
+
+            default:
+                std::cout << "Please selct a Valid option\n\a"; 
+                break;
+
 
         }
 
