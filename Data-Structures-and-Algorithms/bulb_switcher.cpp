@@ -18,17 +18,65 @@
 *   light is a permutation of  [1, 2, ..., n]
 *
 *
+*   Pseudocode
+*   Take in the light array
+*   Iterate through it (used to track moments), looking for the maximum number between previous iterations
+*       Check if the current iteration + 1 (moment + 1) = max 
+    (Reason: if it is equal then it is in the right position, since light consists of permutation of n)
+*           If yes the increment the valid moments
 *
 */
 
 
 #include <iostream>
+#include <vector>
+#include <sstream>
 
 
+
+
+
+
+//driver
 int main()
 {
+    int option;
+    std::istringstream oss;
+
+    do
+    {
+        std::cout << "Select an Option: " << std::endl;
+        std::cout << "0. Exit" << std::endl;
+        std::cout << "1. Input the Light array" << std::endl;
 
 
+        std::cin >> option;
+
+        std::vector <int> light;
+
+
+        switch(option)
+
+        {
+            case 0:
+                break;
+            
+            case 1:
+                std::cout << "Input the Light Array, input X to end: \n";
+                std::string lightInput;
+
+                   
+                    oss >> lightInput;
+
+                    for(auto c: lightInput)
+                    {
+                        light.push_back(int(c));
+
+                    }                
+
+        }
+
+    } while(option != 0);
 
 
     return 0;
