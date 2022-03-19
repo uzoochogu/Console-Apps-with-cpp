@@ -1,5 +1,4 @@
 /*
-*
 *   Bulb Switcher
 *   Description
 *
@@ -30,9 +29,12 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_set>
 #include <sstream>
+#include <cstdlib>
 
 
+//Computes number of times (moments) all the available bulbs are blue 
 int numTimesAllBlue(std::vector <int> light)
 {
     int moment = 0;
@@ -50,28 +52,25 @@ int numTimesAllBlue(std::vector <int> light)
 }
 
 
-
-
-
 //driver
 int main()
 {
-    int option;
-    std::ostringstream oss;
-    std::istringstream iss;
+    int option, permutations;
 
+    //Custom Random Number Generator
+    auto roll = [](int n) { return rand() % n + 1; };
+
+    std::vector <int> light;
+    std::unordered_set <int> container; //Used to help generate permutations
+ 
     do
     {
         std::cout << "Select an Option: " << std::endl;
         std::cout << "0. Exit" << std::endl;
         std::cout << "1. Input the Light array" << std::endl;
 
+        std::cin >> option;     
 
-        std::cin >> option;
-
-        std::vector <int> light;
-
-        std::string lightInput, buf;
         switch(option)
 
         {
@@ -79,36 +78,40 @@ int main()
                 break;
             
             case 1:
-                std::cout << "Input the Light Array, input X to end: \n";
+                std::cout << "For the Light Array, input the number of Lights: ";
+                std::cin >> permutations;
 
-                std::cin.clear();             
-                std::getline(std::cin, lightInput);
+                std::cout << "You selected " << permutations << " permutations\n\n";
+                std::cout << "Randomly Generated Permutation: [";               
 
-                for(auto c: lightInput)
+                //Generate Permutations
+                while(container.size() != permutations)
                 {
-                    light.push_back(int(c));
+                    container.insert(roll(permutations));
+                }
 
-                }                                
-
-                for(auto c: light)
+                //Copy and Print Permutations
+                for( auto c : container )
                 {
-                    std::cout << c;
+                    light.push_back(c);
+                    std::cout << c << ", ";
 
-                }  
+                }
 
-                std::cout << "Done Parsing";
+                std::cout << "]\n\n";
 
+                //Used Function here        
+                std::cout << "The Number of times all the lights are blue is " << numTimesAllBlue(light);
+                std::cout << "\n";
                 break;
 
             default:
-                std::cout << "Please selct a Valid option\n\a"; 
+                std::cout << "Please select a Valid option\n\a"; 
                 break;
-
 
         }
 
     } while(option != 0);
-
 
     return 0;
 }
