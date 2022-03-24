@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 
 /*
@@ -29,18 +30,21 @@ std::vector<int> twoSumIndicesOptimized(const std::vector<int> nums, const int t
 {
     int counter = 0; 
     //we create a hash map for an array of complements
-    std::vector<int> numsHash, result;
+    std::unordered_map<int, int> numsHash;
+    std::vector<int> result;
     int complement;
     for(int i = 0; i != nums.size(); i++)
     {
         counter++;
         complement = target - nums[i];
-        if(numsHash[complement]) //complement exists in the Hashmap
+
+        //use contains() in c++20, both are said to work in O(1) on average
+        if(numsHash.find(complement) != numsHash.end()) //does complement exists in the Hashmap
         {
             result.push_back(numsHash[complement]);
             result.push_back(i);
         }
-        numsHash[nums[i]] = i; //The value is equal to index in nums array
+        numsHash.emplace(std::make_pair(nums[i], i)); //The value is equal to index in nums array
     }
     result.push_back(counter); 
     return result;
@@ -84,8 +88,13 @@ int main()
     std::vector<int> output = twoSumIndices(sample, 23);
     
 
-    std::cout << "The output is at index: "  << output[0] << ", " << output[1]
+    std::cout << "Using the Unoptimized function, The output is at index: "  << output[0] << ", " << output[1]
                 << "\nTotal number of iterations is " << output[2];
+
+    output = twoSumIndicesOptimized(sample, 23);
+
+    std::cout << "\nUsing the Optimized function, The output is at index: "  << output[0] << ", " << output[1]
+                << "\nTotal number of iterations is " << output[2];   
 
 
     return 0;
