@@ -43,7 +43,7 @@ Constraints:
 */
 
 
-//Definition for singly-linked list. (Given)
+//Definition for a singly-linked list node. (Given)
 struct ListNode 
 {
     int val;
@@ -54,13 +54,72 @@ struct ListNode
 };
 
 
+
+
 //Put your solution here
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
     {
+        ListNode* sum = new ListNode(); //head node for the sum
+        ListNode* travelerNode1 = l1;
+        ListNode* travelerNode2 = l2; 
+        ListNode* newDigit = new ListNode(); //keeps track of next digit ListNode
+        
+        
+        
+        int carry = 0; //we'll keep track of the carry between digits
+        int intermediateSum = 0;
+        
+        while(travelerNode1->next == nullptr && travelerNode2->next == nullptr)
+        {
 
+            intermediateSum = 0;
 
+            //Create new Node
+            ListNode* newDigit = new ListNode();
+            
+            //Base case: One is longer than the other
+            if(travelerNode1->next == nullptr && travelerNode2->next != nullptr ) //l1 is longer
+            {
+                intermediateSum = travelerNode1->val + carry;
+
+                if(intermediateSum > 9)
+                {
+                    newDigit->val = intermediateSum % 10;
+                    newDigit->next = new ListNode(intermediateSum/10);
+                }
+
+            }
+            else if (travelerNode1->next != nullptr && travelerNode2->next== nullptr) //l2 is longer
+            {
+                intermediateSum = travelerNode2->val + carry;
+
+                if(intermediateSum > 9)
+                {
+                    newDigit->val = intermediateSum % 10;
+                    newDigit->next = new ListNode(intermediateSum/10);
+                }
+            }
+
+            //sum->val = l1->val + l2->val;
+            //sum->next = addTwoNumbers(l1->next, l2->next);
+
+            intermediateSum = (travelerNode1->val + travelerNode2->val + carry) % 10;
+            newDigit->val = intermediateSum;
+            carry = intermediateSum/10;
+
+            //Move to the next node
+            travelerNode1 = travelerNode1->next;
+            travelerNode2 = travelerNode2->next;  
+
+            //we move to the next Digit ListNode
+            newDigit->next = new ListNode();
+            newDigit = newDigit->next;        
+
+        }
+
+        return sum;
         
     }
 };
