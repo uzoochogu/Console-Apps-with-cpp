@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 
 /*
@@ -38,6 +41,16 @@ Constraints:
     The number of nodes in each linked list is in the range [1, 100].
     0 <= Node.val <= 9
     It is guaranteed that the list represents a number that does not have leading zeros.
+
+
+Testing the Code:
+We would use a text file to test the code. 
+Each line will contain two numbers separated by a white space.
+
+The driver code will run through each line until EOF is reached calling the
+addTwoNumbers method from the solution class.
+
+
 
 
 */
@@ -122,12 +135,89 @@ public:
         return sum;
         
     }
+
+
+    
 };
 
 
+//Driver Code to test Solution.
+
+/*This function will convert a number to a linkedList of digit.
+It returns the head of the list
+*/
+ListNode* toLinkedList (int val)
+{
+
+
+
+}
+
+/*Prints the linked list in the correct order */
+void printLinkedList(ListNode* head)
+{
+
+}
 
 int main()
 {
+    std::fstream testFile("test_for_add_two_numbers_leetcode.txt", std::ios::in); 
+
+    std::stringstream stringBuffer;
+    int num1,num2;
+    std::string lineBuffer, numberBuffer;
+    ListNode *number1, *number2;
+
+
+    //check if it opens
+    if (!testFile.is_open()) 
+    {
+        std::cout << "failed to open " << "test_for_add_two_numbers_leetcode.txt" << '\n';
+    } 
+    else  //program loop
+    {
+        while(!testFile.eof()) //keep reading the file
+        {
+            getline(testFile, lineBuffer);
+            
+            stringBuffer << lineBuffer << lineBuffer;
+            //stringBuffer.str(lineBuffer);
+            stringBuffer >> numberBuffer;
+            num1 = std::stoi(numberBuffer);
+            stringBuffer >> numberBuffer;
+            num2 = std::stoi(numberBuffer);
+
+            //convert to linkedlist
+            number1 = toLinkedList(num1);
+            number2 = toLinkedList(num2);
+
+            Solution sol;
+
+
+            printLinkedList(sol.addTwoNumbers(number1, number2));
+
+
+            
+         
+            //for(std::string lineBuffer; getline(stri, line, " "); )
+            {
+                //num = std::stoi(line);
+            }
+
+        }
+        
+
+
+    }
+    
+
+    
+    //we read from the file
+    
+    
+
+
+    
 
 
     return 0;
