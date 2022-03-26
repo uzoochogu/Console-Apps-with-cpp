@@ -77,20 +77,20 @@ public:
         ListNode* sum = new ListNode(); //head node for the sum
         ListNode* travelerNode1 = l1;
         ListNode* travelerNode2 = l2; 
-        ListNode* newDigit = new ListNode(); //keeps track of next digit ListNode
+        ListNode* newDigit = new ListNode(); //Node to keep track of next digit ListNode
         
         
         
         int carry = 0; //we'll keep track of the carry between digits
         int intermediateSum = 0;
         
-        while(travelerNode1->next == nullptr && travelerNode2->next == nullptr)
+        while(travelerNode1->next != nullptr && travelerNode2->next != nullptr)
         {
 
             intermediateSum = 0;
 
             //Create new Node
-            ListNode* newDigit = new ListNode();
+            //ListNode* newDigit = new ListNode();
             
             //Base case: One is longer than the other
             if(travelerNode1->next == nullptr && travelerNode2->next != nullptr ) //l1 is longer
@@ -137,6 +137,8 @@ public:
     }
 
 
+
+
     
 };
 
@@ -146,17 +148,37 @@ public:
 /*This function will convert a number to a linkedList of digit.
 It returns the head of the list
 */
-ListNode* toLinkedList (int val)
+ListNode* toLinkedList(int val)
 {
+    ListNode* head = new ListNode(val%10);
+    ListNode* traverse = head;
+    std::cout << "We converted "<< val << " to Linked List!\n";
 
-
-
+    for(int i=1; i <= (val/10); i++ )
+    {
+        traverse->next =  new ListNode(val/(i*10));
+        traverse = traverse->next;    
+    }
+    return head;
 }
 
 /*Prints the linked list in the correct order */
 void printLinkedList(ListNode* head)
 {
+    std::cout << "Printing Works\n";     
+    ListNode* traverse = head;
+    std::cout << "( ";
+    while(traverse->next != nullptr)
+    {
+        std::cout << traverse->val;
 
+        if(traverse->next != nullptr)
+        {
+            std::cout << " => ";
+        }
+        traverse = traverse->next;
+    }
+    std::cout << ") ";
 }
 
 int main()
@@ -165,8 +187,9 @@ int main()
 
     std::stringstream stringBuffer;
     int num1,num2;
-    std::string lineBuffer, numberBuffer;
+    std::string numberBuffer;
     ListNode *number1, *number2;
+    //ListNode *test = new ListNode();
 
 
     //check if it opens
@@ -176,49 +199,30 @@ int main()
     } 
     else  //program loop
     {
-        while(!testFile.eof()) //keep reading the file
+        
+        for( std::string lineBuffer ;std::getline(testFile, lineBuffer);) //keep reading the file
         {
-            getline(testFile, lineBuffer);
-            
-            stringBuffer << lineBuffer << lineBuffer;
-            //stringBuffer.str(lineBuffer);
+            //stringBuffer << lineBuffer << lineBuffer;
+            stringBuffer.str(lineBuffer);
             stringBuffer >> numberBuffer;
             num1 = std::stoi(numberBuffer);
             stringBuffer >> numberBuffer;
             num2 = std::stoi(numberBuffer);
 
+            stringBuffer.clear();
+
             //convert to linkedlist
             number1 = toLinkedList(num1);
             number2 = toLinkedList(num2);
 
-            Solution sol;
+            Solution sol = Solution();
 
-
-            printLinkedList(sol.addTwoNumbers(number1, number2));
-
-
-            
-         
-            //for(std::string lineBuffer; getline(stri, line, " "); )
-            {
-                //num = std::stoi(line);
-            }
+            printLinkedList(sol.addTwoNumbers(number1, number2));           
+             
 
         }
-        
-
 
     }
-    
-
-    
-    //we read from the file
-    
-    
-
-
-    
-
 
     return 0;
 }
