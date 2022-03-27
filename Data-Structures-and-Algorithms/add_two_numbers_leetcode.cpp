@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-
+#include <cmath>
 
 /*
 Description
@@ -74,15 +74,18 @@ class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
     {
-        ListNode* sum = new ListNode(); //head node for the sum
-        ListNode* travelerNode1 = l1;
-        ListNode* travelerNode2 = l2; 
-        ListNode* newDigit = new ListNode(); //Node to keep track of next digit ListNode
+        ListNode* newDigit; //Node to keep track of next digit ListNode
         
+        //For the first digit
+        ListNode* sum = new ListNode((l1->val + l2->val) % 10); //head node for the sum
         
+        int carry = (l1->val + l2->val) / 10; //we'll keep track of the carry between digits
+        int intermediateSum;  //Stores sum per digit
+
+        sum->next = newDigit; 
+        ListNode* travelerNode1 = l1->next;
+        ListNode* travelerNode2 = l2->next; 
         
-        int carry = 0; //we'll keep track of the carry between digits
-        int intermediateSum = 0;
         
         while(travelerNode1->next != nullptr && travelerNode2->next != nullptr)
         {
@@ -102,7 +105,7 @@ public:
                     newDigit->val = intermediateSum % 10;
                     newDigit->next = new ListNode(intermediateSum/10);
                 }
-
+                return sum;
             }
             else if (travelerNode1->next != nullptr && travelerNode2->next== nullptr) //l2 is longer
             {
@@ -113,35 +116,34 @@ public:
                     newDigit->val = intermediateSum % 10;
                     newDigit->next = new ListNode(intermediateSum/10);
                 }
+                return sum;
             }
 
             //sum->val = l1->val + l2->val;
             //sum->next = addTwoNumbers(l1->next, l2->next);
 
-            intermediateSum = (travelerNode1->val + travelerNode2->val + carry) % 10;
-            newDigit->val = intermediateSum;
-            carry = intermediateSum/10;
+            else
+            {
+                intermediateSum = (travelerNode1->val + travelerNode2->val + carry) % 10;
+                newDigit->val = intermediateSum;
+                carry = intermediateSum/10;
 
-            //Move to the next node
-            travelerNode1 = travelerNode1->next;
-            travelerNode2 = travelerNode2->next;  
+                //Move to the next node
+                travelerNode1 = travelerNode1->next;
+                travelerNode2 = travelerNode2->next;  
 
-            //we move to the next Digit ListNode
-            newDigit->next = new ListNode();
-            newDigit = newDigit->next;        
+                //we move to the next Digit ListNode
+                newDigit->next = new ListNode();
+                newDigit = newDigit->next;   
+
+            }
 
         }
 
         return sum;
-        
     }
-
-
-
-
-    
+   
 };
-
 
 //Driver Code to test Solution.
 
@@ -154,9 +156,9 @@ ListNode* toLinkedList(int val)
     ListNode* traverse = head;
     std::cout << "We converted "<< val << " to Linked List!\n";
 
-    for(int i=1; i <= (val/10); i++ )
+    for(int i=1;  val/int(std::pow(10.0, i)) != 0; i++ )
     {
-        traverse->next =  new ListNode(val/(i*10));
+        traverse->next =  new ListNode(val/int(std::pow(10.0, i)));
         traverse = traverse->next;    
     }
     return head;
@@ -178,7 +180,7 @@ void printLinkedList(ListNode* head)
         }
         traverse = traverse->next;
     }
-    std::cout << ") ";
+    std::cout << ") \n";
 }
 
 int main()
