@@ -86,8 +86,8 @@ public:
         ListNode* travelerNode1 = l1->next;
         ListNode* travelerNode2 = l2->next; 
         
-        
-        while(travelerNode1->next != nullptr && travelerNode2->next != nullptr)
+        //TODO: Add functionality to add varying length LinkedList
+        while(travelerNode1 != nullptr && travelerNode2 != nullptr)
         {
 
             intermediateSum = 0;
@@ -96,7 +96,7 @@ public:
             //ListNode* newDigit = new ListNode();
             
             //Base case: One is longer than the other
-            if(travelerNode1->next == nullptr && travelerNode2->next != nullptr ) //l1 is longer
+            if(travelerNode1 == nullptr && travelerNode2 != nullptr ) //l1 is longer
             {
                 intermediateSum = travelerNode1->val + carry;
 
@@ -156,6 +156,7 @@ ListNode* toLinkedList(int val)
     ListNode* traverse = head;
     std::cout << "We converted "<< val << " to Linked List!\n";
 
+    //TODO: Fix algorithm to extract digits
     for(int i=1;  val/int(std::pow(10.0, i)) != 0; i++ )
     {
         traverse->next =  new ListNode(val/int(std::pow(10.0, i)));
@@ -170,7 +171,7 @@ void printLinkedList(ListNode* head)
     std::cout << "Printing Works\n";     
     ListNode* traverse = head;
     std::cout << "( ";
-    while(traverse->next != nullptr)
+    while(traverse != nullptr)
     {
         std::cout << traverse->val;
 
