@@ -67,8 +67,6 @@ struct ListNode
 };
 
 
-
-
 //Put your solution here
 class Solution {
 public:
@@ -96,7 +94,7 @@ public:
             //ListNode* newDigit = new ListNode();
             
             //Base case: One is longer than the other
-            if(travelerNode1 == nullptr && travelerNode2 != nullptr ) //l1 is longer
+            if(travelerNode1 == nullptr && travelerNode2 != nullptr ) //l2 is longer
             {
                 intermediateSum = travelerNode1->val + carry;
 
@@ -104,10 +102,16 @@ public:
                 {
                     newDigit->val = intermediateSum % 10;
                     newDigit->next = new ListNode(intermediateSum/10);
-                }
-                return sum;
+                }                
+                //Move to the next node
+                //travelerNode1 = travelerNode1->next;
+                travelerNode2 = travelerNode2->next;  
+
+                //we move to the next Digit ListNode
+                newDigit->next = new ListNode();
+                newDigit = newDigit->next;                   
             }
-            else if (travelerNode1->next != nullptr && travelerNode2->next== nullptr) //l2 is longer
+            else if (travelerNode1 != nullptr && travelerNode2 == nullptr) //l1 is longer
             {
                 intermediateSum = travelerNode2->val + carry;
 
@@ -116,12 +120,19 @@ public:
                     newDigit->val = intermediateSum % 10;
                     newDigit->next = new ListNode(intermediateSum/10);
                 }
-                return sum;
-            }
+                
+                //Move to the next node
+                travelerNode1 = travelerNode1->next;
+                //travelerNode2 = travelerNode2->next;  
 
+                //we move to the next Digit ListNode
+                newDigit->next = new ListNode();
+                newDigit = newDigit->next;   
+
+
+            }
             //sum->val = l1->val + l2->val;
             //sum->next = addTwoNumbers(l1->next, l2->next);
-
             else
             {
                 intermediateSum = (travelerNode1->val + travelerNode2->val + carry) % 10;
@@ -137,33 +148,12 @@ public:
                 newDigit = newDigit->next;   
 
             }
-
         }
-
         return sum;
-    }
-   
+    }   
 };
 
 //Driver Code to test Solution.
-
-/*This function will convert a number to a linkedList of digit.
-It returns the head of the list
-*/
-ListNode* toLinkedList(int val)
-{
-    ListNode* head = new ListNode(val%10);
-    ListNode* traverse = head;
-    std::cout << "We converted "<< val << " to Linked List!\n";
-
-    //TODO: Fix algorithm to extract digits
-    for(int i=1;  val/int(std::pow(10.0, i)) != 0; i++ )
-    {
-        traverse->next =  new ListNode(val/int(std::pow(10.0, i)));
-        traverse = traverse->next;    
-    }
-    return head;
-}
 
 /*Prints the linked list in the correct order */
 void printLinkedList(ListNode* head)
@@ -184,6 +174,23 @@ void printLinkedList(ListNode* head)
     std::cout << ") \n";
 }
 
+/*This function will convert a number to a linkedList of digit.
+It returns the head of the list
+*/
+ListNode* toLinkedList(int val)
+{
+    ListNode* head = new ListNode(val%10);
+    ListNode* traverse = head;
+    std::cout << "We converted "<< val << " to Linked List!\n";
+    
+    for(int i=1;  val/int(std::pow(10.0, i)) > 0; i++ )
+    {
+        traverse->next =  new ListNode( (val/int(std::pow(10.0, i))) % 10 );  // (val/10^i ) % 10
+        traverse = traverse->next;    
+    }
+    return head;
+}
+
 int main()
 {
     std::fstream testFile("test_for_add_two_numbers_leetcode.txt", std::ios::in); 
@@ -193,7 +200,6 @@ int main()
     std::string numberBuffer;
     ListNode *number1, *number2;
     //ListNode *test = new ListNode();
-
 
     //check if it opens
     if (!testFile.is_open()) 
@@ -221,11 +227,7 @@ int main()
             Solution sol = Solution();
 
             printLinkedList(sol.addTwoNumbers(number1, number2));           
-             
-
         }
-
     }
-
     return 0;
 }
