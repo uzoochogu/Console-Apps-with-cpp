@@ -85,24 +85,30 @@ public:
         ListNode* travelerNode2 = l2->next; 
         
         //TODO: Add functionality to add varying length LinkedList
+        //This iterates until both lists have been exhausted
         while(travelerNode1 != nullptr && travelerNode2 != nullptr)
         {
 
             intermediateSum = 0;
-
-            //Create new Node
-            //ListNode* newDigit = new ListNode();
             
             //Base case: One is longer than the other
             if(travelerNode1 == nullptr && travelerNode2 != nullptr ) //l2 is longer
             {
-                intermediateSum = travelerNode1->val + carry;
+                intermediateSum = travelerNode2->val + carry; //Add only l2
 
-                if(intermediateSum > 9)
-                {
+                carry = intermediateSum / 10;
+
+                //if(intermediateSum > 9)
+                //{
                     newDigit->val = intermediateSum % 10;
-                    newDigit->next = new ListNode(intermediateSum/10);
-                }                
+                    //newDigit->next = new ListNode(intermediateSum/10);
+                    
+                //}
+                //else
+                //{
+                    //newDigit->val = intermediateSum;
+                //}                
+                
                 //Move to the next node
                 //travelerNode1 = travelerNode1->next;
                 travelerNode2 = travelerNode2->next;  
@@ -113,13 +119,14 @@ public:
             }
             else if (travelerNode1 != nullptr && travelerNode2 == nullptr) //l1 is longer
             {
-                intermediateSum = travelerNode2->val + carry;
+                intermediateSum = travelerNode1->val + carry; //Add only l1
+                carry = intermediateSum / 10;
 
-                if(intermediateSum > 9)
-                {
+                //if(intermediateSum > 9)
+                //{
                     newDigit->val = intermediateSum % 10;
-                    newDigit->next = new ListNode(intermediateSum/10);
-                }
+                    //newDigit->next = new ListNode(intermediateSum/10);
+                //}
                 
                 //Move to the next node
                 travelerNode1 = travelerNode1->next;
@@ -135,8 +142,8 @@ public:
             //sum->next = addTwoNumbers(l1->next, l2->next);
             else
             {
-                intermediateSum = (travelerNode1->val + travelerNode2->val + carry) % 10;
-                newDigit->val = intermediateSum;
+                intermediateSum = travelerNode1->val + travelerNode2->val + carry;
+                newDigit->val = intermediateSum % 10;
                 carry = intermediateSum/10;
 
                 //Move to the next node
