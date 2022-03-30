@@ -5,56 +5,49 @@
 #include <cmath>
 
 /*
-Description
-
-You are given two non-empty linked lists representing two non-negative integers. 
-The digits are stored in reverse order and each of their nodes contain a single digit. 
-Add the two numbers and return it as a linked list.
-
-You may assume the two numbers do not contain any leading zero, except the number 0 itself.
-
-Example:
-
-Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
-Output: 7 -> 0 -> 8
-Explanation: 342 + 465 = 807.
-
-Example 1:
-
-Input: l1 = [2,4,3], l2 = [5,6,4]
-Output: [7,0,8]
-Explanation: 342 + 465 = 807.
-
-Example 2:
-
-Input: l1 = [0], l2 = [0]
-Output: [0]
-
-Example 3:
-
-Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
-Output: [8,9,9,9,0,0,0,1]
-
-
-Constraints:
-
-    The number of nodes in each linked list is in the range [1, 100].
-    0 <= Node.val <= 9
-    It is guaranteed that the list represents a number that does not have leading zeros.
-
-
-Testing the Code:
-We would use a text file to test the code. 
-Each line will contain two numbers separated by a white space.
-
-The driver code will run through each line until EOF is reached calling the
-addTwoNumbers method from the solution class.
-
-
-
-
+*   Description
+* 
+*   You are given two non-empty linked lists representing two non-negative integers. 
+*   The digits are stored in reverse order and each of their nodes contain a single digit. 
+*   Add the two numbers and return it as a linked list.
+*
+*   You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+*
+*   Example:
+*
+*   Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+*   Output: (7 -> 0 -> 8)
+*   Explanation: 342 + 465 = 807.
+*
+*
+*   Example 2:
+*
+*   Input: l1 = [0], l2 = [0]
+*   Output: [0]
+*   
+*   Example 3:
+*
+*   Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+*   Output: [8,9,9,9,0,0,0,1]
+*
+*
+*   Constraints:
+*   The number of nodes in each linked list is in the range [1, 100]
+*   0 <= Node.val <= 9
+*   It is guaranteed that the list represents a number that does not have leading zeros.
+*
+*   Testing the Code:
+*   We would use a text file to test the code. 
+*   Each line will contain two numbers separated by a white space.
+*
+*   The driver code will run through each line until EOF is reached calling the
+*   addTwoNumbers() method from the solution class and prints the result.
+*
+*   Strategy: (Either would work)
+*   A. Traverse through each Digit node, add and keep track of the carry between digits (Implemented here)
+*   B. Create two functions. ToLinkedList() and ToNumber(). Convert two linkedList to number
+*      perform addition and then convert back to LinkedLList. (More Straight forward and Efficient).
 */
-
 
 //Definition for a singly-linked list node. (Given)
 struct ListNode 
@@ -66,36 +59,31 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-
 //Put your solution here
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
     {
-        ListNode* newDigit; //Node to keep track of next digit ListNode
+        ListNode* newDigit = new ListNode(0); //Node to keep track of next digit's ListNode
         
         //For the first digit
-        ListNode* sum = new ListNode((l1->val + l2->val) % 10); //head node for the sum
+        ListNode* sum = new ListNode((l1->val + l2->val) % 10, newDigit); //head node for the sum
         
-        int carry = (l1->val + l2->val) / 10; //we'll keep track of the carry between digits
+        int carry = (l1->val + l2->val) / 10; //to keep track of the carry between digits
         int intermediateSum;  //Stores sum per digit
 
-        sum->next = newDigit; 
-        ListNode* travelerNode1 = l1->next;
+        ListNode* travelerNode1 = l1->next; //Node pointers for traversals
         ListNode* travelerNode2 = l2->next; 
         
-        //TODO: Add functionality to add varying length LinkedList
-        //This iterates until both lists have been exhausted
-        while(travelerNode1 != nullptr && travelerNode2 != nullptr)
+        //iterates until both lists have been exhausted
+        while(travelerNode1 != nullptr || travelerNode2 != nullptr)
         {
-
             intermediateSum = 0;
-            
+
             //Base case: One is longer than the other
             if(travelerNode1 == nullptr && travelerNode2 != nullptr ) //l2 is longer
             {
                 intermediateSum = travelerNode2->val + carry; //Add only l2
-
                 newDigit->val = intermediateSum % 10;
                 
                 //Move to the next node
@@ -104,7 +92,6 @@ public:
             else if (travelerNode1 != nullptr && travelerNode2 == nullptr) //l1 is longer
             {
                 intermediateSum = travelerNode1->val + carry; //Add only l1
-
                 newDigit->val = intermediateSum % 10;
   
                 //Move to the next node
@@ -124,7 +111,7 @@ public:
             carry = intermediateSum/10;
 
             // only move to the next Digit if digits still exists
-            if(travelerNode1 != nullptr && travelerNode2 != nullptr) 
+            if(travelerNode1 != nullptr || travelerNode2 != nullptr) 
             {
                 newDigit->next = new ListNode();
                 newDigit = newDigit->next;
@@ -188,8 +175,7 @@ int main()
         std::cout << "failed to open " << "test_for_add_two_numbers_leetcode.txt" << '\n';
     } 
     else  //program loop
-    {
-        
+    {        
         for( std::string lineBuffer ;std::getline(testFile, lineBuffer);) //keep reading the file
         {
             //stringBuffer << lineBuffer << lineBuffer;
