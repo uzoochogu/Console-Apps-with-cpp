@@ -96,65 +96,39 @@ public:
             {
                 intermediateSum = travelerNode2->val + carry; //Add only l2
 
-                carry = intermediateSum / 10;
-
-                //if(intermediateSum > 9)
-                //{
-                    newDigit->val = intermediateSum % 10;
-                    //newDigit->next = new ListNode(intermediateSum/10);
-                    
-                //}
-                //else
-                //{
-                    //newDigit->val = intermediateSum;
-                //}                
+                newDigit->val = intermediateSum % 10;
                 
                 //Move to the next node
-                //travelerNode1 = travelerNode1->next;
-                travelerNode2 = travelerNode2->next;  
-
-                //we move to the next Digit ListNode
-                newDigit->next = new ListNode();
-                newDigit = newDigit->next;                   
+                travelerNode2 = travelerNode2->next;      
             }
             else if (travelerNode1 != nullptr && travelerNode2 == nullptr) //l1 is longer
             {
                 intermediateSum = travelerNode1->val + carry; //Add only l1
-                carry = intermediateSum / 10;
 
-                //if(intermediateSum > 9)
-                //{
-                    newDigit->val = intermediateSum % 10;
-                    //newDigit->next = new ListNode(intermediateSum/10);
-                //}
-                
+                newDigit->val = intermediateSum % 10;
+  
                 //Move to the next node
-                travelerNode1 = travelerNode1->next;
-                //travelerNode2 = travelerNode2->next;  
-
-                //we move to the next Digit ListNode
-                newDigit->next = new ListNode();
-                newDigit = newDigit->next;   
-
-
+                travelerNode1 = travelerNode1->next;  
             }
-            //sum->val = l1->val + l2->val;
-            //sum->next = addTwoNumbers(l1->next, l2->next);
             else
             {
                 intermediateSum = travelerNode1->val + travelerNode2->val + carry;
                 newDigit->val = intermediateSum % 10;
-                carry = intermediateSum/10;
-
+                
                 //Move to the next node
                 travelerNode1 = travelerNode1->next;
                 travelerNode2 = travelerNode2->next;  
-
-                //we move to the next Digit ListNode
-                newDigit->next = new ListNode();
-                newDigit = newDigit->next;   
-
             }
+            
+            //compute new carry
+            carry = intermediateSum/10;
+
+            // only move to the next Digit if digits still exists
+            if(travelerNode1 != nullptr && travelerNode2 != nullptr) 
+            {
+                newDigit->next = new ListNode();
+                newDigit = newDigit->next;
+            }              
         }
         return sum;
     }   
@@ -167,7 +141,7 @@ void printLinkedList(ListNode* head)
 {
     std::cout << "Printing Works\n";     
     ListNode* traverse = head;
-    std::cout << "( ";
+    std::cout << "(";
     while(traverse != nullptr)
     {
         std::cout << traverse->val;
