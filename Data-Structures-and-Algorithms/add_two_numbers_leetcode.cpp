@@ -32,7 +32,7 @@
 *
 *
 *   Constraints:
-*   The number of nodes in each linked list is in the range [1, 100]
+*   The number of nodes in each linked list is in the range [1, 100] ->(Ignored for storage overflow consideration and over)
 *   0 <= Node.val <= 9
 *   It is guaranteed that the list represents a number that does not have leading zeros.
 *
@@ -43,10 +43,10 @@
 *   The driver code will run through each line until EOF is reached calling the
 *   addTwoNumbers() method from the solution class and prints the result.
 *
-*   Strategy: (Either would work)
-*   A. Traverse through each Digit node, add and keep track of the carry between digits (Implemented here)
-*   B. Create two functions. ToLinkedList() and ToNumber(). Convert two linkedList to number
-*      perform addition and then convert back to LinkedLList. (More Straight forward and Efficient).
+*   Strategies: (Both were implemented here)
+*   A. Traverse through each Digit node, add and keep track of the carry between digits -> addTwoNumbers()
+*   B. Create two functions. ToLinkedList() and ToNumber(). Convert two linkedList to number 
+*      perform addition and then convert back to LinkedLList. (More Straight forward and Efficient). ->addTwoNumbersUsingInt()
 */
 
 //Definition for a singly-linked list node. (Given)
@@ -58,6 +58,61 @@ struct ListNode
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
+
+//Utility Functions
+
+/*Prints the linked list in the correct order */
+void printLinkedList(ListNode* head)
+{
+    std::cout << "Printing Works\n";     
+    ListNode* traverse = head;
+    std::cout << "(";
+    while(traverse != nullptr)
+    {
+        std::cout << traverse->val;
+
+        if(traverse->next != nullptr)
+        {
+            std::cout << " => ";
+        }
+        traverse = traverse->next;
+    }
+    std::cout << ") \n";
+}
+
+/*This function will convert a number to a linkedList of digit.
+It returns the head of the list
+*/
+ListNode* toLinkedList(int val)
+{
+    ListNode* head = new ListNode(val%10);
+    ListNode* traverse = head;
+    std::cout << "We converted "<< val << " to Linked List!\n";
+    
+    for(int i=1;  val/int(std::pow(10.0, i)) > 0; i++ )
+    {
+        traverse->next =  new ListNode( (val/int(std::pow(10.0, i))) % 10 );  // (val/10^i ) % 10
+        traverse = traverse->next;    
+    }
+    return head;
+}
+
+
+//Converts a given LinkedList to an integer
+int toInt(ListNode* list)
+{
+    ListNode* travelerNode = list;
+    int counter = 0;
+    int value = 0;
+    //Traverse the LinkedList
+    while(travelerNode != nullptr)
+    {
+        value += travelerNode->val * int(std::pow(10, counter)); //Keep adding the place values.         
+        counter++;
+        travelerNode = travelerNode->next;
+    }
+    return value;
+}
 
 //Put your solution here
 class Solution {
@@ -118,47 +173,18 @@ public:
             }              
         }
         return sum;
-    }   
+    } 
+
+    ListNode* addTwoNumbersUsingInt(ListNode* l1, ListNode* l2) 
+    {
+        int sum = toInt(l1) + toInt(l2);
+
+        //Convert back to LinkedList
+        return toLinkedList(sum);
+    }  
 };
 
-//Driver Code to test Solution.
-
-/*Prints the linked list in the correct order */
-void printLinkedList(ListNode* head)
-{
-    std::cout << "Printing Works\n";     
-    ListNode* traverse = head;
-    std::cout << "(";
-    while(traverse != nullptr)
-    {
-        std::cout << traverse->val;
-
-        if(traverse->next != nullptr)
-        {
-            std::cout << " => ";
-        }
-        traverse = traverse->next;
-    }
-    std::cout << ") \n";
-}
-
-/*This function will convert a number to a linkedList of digit.
-It returns the head of the list
-*/
-ListNode* toLinkedList(int val)
-{
-    ListNode* head = new ListNode(val%10);
-    ListNode* traverse = head;
-    std::cout << "We converted "<< val << " to Linked List!\n";
-    
-    for(int i=1;  val/int(std::pow(10.0, i)) > 0; i++ )
-    {
-        traverse->next =  new ListNode( (val/int(std::pow(10.0, i))) % 10 );  // (val/10^i ) % 10
-        traverse = traverse->next;    
-    }
-    return head;
-}
-
+//Interface 
 int main()
 {
     std::fstream testFile("test_for_add_two_numbers_leetcode.txt", std::ios::in); 
@@ -193,7 +219,13 @@ int main()
 
             Solution sol = Solution();
 
-            printLinkedList(sol.addTwoNumbers(number1, number2));           
+            //Strategy 1
+            printLinkedList(sol.addTwoNumbers(number1, number2));  
+
+            //Strategy 2
+            std::cout << "\nAlternative method\n";
+            printLinkedList(sol.addTwoNumbersUsingInt(number1, number2));
+            std::cout << "\n\n";        
         }
     }
     return 0;
