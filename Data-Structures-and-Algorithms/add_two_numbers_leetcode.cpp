@@ -136,7 +136,7 @@ public:
             intermediateSum = 0;
 
             //Base case: One is longer than the other
-            if(travelerNode1 == nullptr && travelerNode2 != nullptr ) //l2 is longer
+            if(travelerNode1 == nullptr) //l2 is longer
             {
                 intermediateSum = travelerNode2->val + carry; //Add only l2
                 newDigit->val = intermediateSum % 10;
@@ -144,7 +144,7 @@ public:
                 //Move to the next node
                 travelerNode2 = travelerNode2->next;      
             }
-            else if (travelerNode1 != nullptr && travelerNode2 == nullptr) //l1 is longer
+            else if (travelerNode2 == nullptr) //l1 is longer
             {
                 intermediateSum = travelerNode1->val + carry; //Add only l1
                 newDigit->val = intermediateSum % 10;
@@ -170,6 +170,10 @@ public:
             {
                 newDigit->next = new ListNode();
                 newDigit = newDigit->next;
+            }
+            else if(carry > 0) //no next digit, append final carry
+            {
+                newDigit->next = new ListNode(carry);
             }              
         }
         return sum;
