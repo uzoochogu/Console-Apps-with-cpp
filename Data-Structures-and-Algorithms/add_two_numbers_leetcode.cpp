@@ -37,13 +37,15 @@
 *   It is guaranteed that the list represents a number that does not have leading zeros.
 *
 *   Testing the Code:
+*   (The test interface only works with 32bit Int because of the method of streaming)
+*   (Your Functions should work on test cases higher than 32bit Int)
 *   We would use a text file to test the code. 
 *   Each line will contain two numbers separated by a white space.
 *
 *   The driver code will run through each line until EOF is reached calling the
 *   addTwoNumbers() method from the solution class and prints the result.
 *
-*   Strategies: (Both were implemented here)
+*   Strategies: (Both were implemented here, Strategy B is limited by size of Int)
 *   A. Traverse through each Digit node, add and keep track of the carry between digits -> addTwoNumbers()
 *   B. Create two functions. ToLinkedList() and ToNumber(). Convert two linkedList to number 
 *      perform addition and then convert back to LinkedLList. (More Straight forward and Efficient). ->addTwoNumbersUsingInt()
