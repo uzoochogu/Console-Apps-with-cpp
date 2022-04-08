@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <unordered_map>     //for hash map
 
 
 /*
@@ -50,9 +51,36 @@
 */
 
 //Write your code here
-class Solution {
+class Solution 
+{
 public:
-    int lengthOfLongestSubstring(std::string s) {
+    int lengthOfLongestSubstring(std::string s) 
+    {
+         
+         
+         std::string buf;
+         for(auto i:s)
+         {
+              for(auto j:buf)
+              {
+                  if (*i == *j)
+                  {
+                      buf=0;
+                      buf += *j;
+                  }
+                  else
+                  {
+                       buf += *i;
+    
+                  }
+              }
+      
+         }
+
+         return buf.size();
+         
+         
+
         
     }
 };
