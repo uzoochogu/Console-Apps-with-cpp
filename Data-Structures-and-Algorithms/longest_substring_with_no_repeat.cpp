@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <string>
-#include <unordered_map>     //for hash map
+#include <vector>
 
 
 /*
@@ -55,22 +57,20 @@ class Solution
 {
 public:
     int lengthOfLongestSubstring(std::string s) 
-    {
-         
-         
+    {      
          std::string buf;
          for(auto i:s)
          {
               for(auto j:buf)
               {
-                  if (*i == *j)
+                  if (i == j)
                   {
-                      buf=0;
-                      buf += *j;
+                      buf="";
+                      buf += j;
                   }
                   else
                   {
-                       buf += *i;
+                       buf += i;
     
                   }
               }
@@ -85,14 +85,14 @@ public:
     }
 
     //Brute force approach
-    int lengthOfLongestSubstring2(string s) {
+    int lengthOfLongestSubstring2(std::string s) {
         int n = s.length();
 
         int res = 0;
         for (int i = 0; i < n; i++) {
             for (int j = i; j < n; j++) {
                 if (checkRepetition(s, i, j)) {
-                    res = max(res, j - i + 1);
+                    res = std::max(res, j - i + 1);
                 }
             }
         }
@@ -100,8 +100,8 @@ public:
         return res;
     }
 
-    bool checkRepetition(string& s, int start, int end) {
-        vector<int> chars(128);
+    bool checkRepetition(std::string& s, int start, int end) {
+        std::vector<int> chars(128);
 
         for (int i = start; i <= end; i++) {
             char c = s[i];
@@ -115,8 +115,8 @@ public:
     }
     
     //Sliding Window Solution
-    int lengthOfLongestSubstring(string s) {
-        vector<int> chars(128);
+    int lengthOfLongestSubstringSW(std::string s) {
+        std::vector<int> chars(128);
 
         int left = 0;
         int right = 0;
@@ -132,7 +132,7 @@ public:
                 left++;
             }
 
-            res = max(res, right - left + 1);
+            res = std::max(res, right - left + 1);
 
             right++;
         }
@@ -143,9 +143,42 @@ public:
 };
 
 
-//Interface
+//Interface to test code
 int main()
 {
+    std::fstream testFile("test_for_longest_substring_with_no_repeat.txt", std::ios::in); 
 
+    std::cout << "Length of Longest substring with no repeating Characters:\n"; 
+
+    //check if it opens
+    if (!testFile.is_open()) 
+    {
+        std::cout << "failed to open " << "test_for_longest_substring_with_no_repeat.txt" << '\n';
+    } 
+    else  //program loop
+    {        
+        for( std::string lineBuffer ;std::getline(testFile, lineBuffer);) //keep reading the file
+        {
+
+            std::cout << "In the following string: (\"" << lineBuffer << "\") Length = ";
+
+            //Answers using different strategies
+
+            Solution sol = Solution() ;
+
+            //Strategy 1
+            std::cout << sol.lengthOfLongestSubstringSW(lineBuffer);   
+
+            //Strategy 2
+            std::cout << "\nAlternative method:   Length = ";
+            std::cout << sol.lengthOfLongestSubstring2(lineBuffer); 
+            std::cout << "\n";   
+
+            //Strategy 3
+            std::cout << "\nAnother Alternative method:   Length = ";
+            std::cout << sol.lengthOfLongestSubstring(lineBuffer); 
+            std::cout << "\n";     
+        }
+    }
     return 0;
 }
