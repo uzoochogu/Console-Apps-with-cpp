@@ -57,31 +57,11 @@ class Solution
 {
 public:
     int lengthOfLongestSubstring(std::string s) 
-    {      
-         std::string buf;
-         for(auto i:s)
-         {
-              for(auto j:buf)
-              {
-                  if (i == j)
-                  {
-                      buf="";
-                      buf += j;
-                  }
-                  else
-                  {
-                       buf += i;
-    
-                  }
-              }
-      
-         }
+    {   
+        //Will use hashmap
+           
 
-         return buf.size();
-         
-         
-
-        
+        return 0
     }
 
     //Brute force approach
@@ -175,9 +155,9 @@ int main()
             std::cout << "\n";   
 
             //Strategy 3
-            std::cout << "\nAnother Alternative method:   Length = ";
+            std::cout << "Another Alternative method:   Length = ";
             std::cout << sol.lengthOfLongestSubstring(lineBuffer); 
-            std::cout << "\n";     
+            std::cout << "\n\n";     
         }
     }
     return 0;
