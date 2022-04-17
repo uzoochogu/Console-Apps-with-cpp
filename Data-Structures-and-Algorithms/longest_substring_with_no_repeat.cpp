@@ -129,7 +129,7 @@ int main()
     } 
     else  //program loop
     {        
-        for( std::string lineBuffer ;std::getline(testFile, lineBuffer);) //keep reading the file
+        for( std::string lineBuffer; std::getline(testFile, lineBuffer); ) //keep reading the file
         {
 
             std::cout << "In the following string: (\"" << lineBuffer << "\") Length = ";
