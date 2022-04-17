@@ -45,8 +45,8 @@
 *   s consists of English letters, digits, symbols and spaces.
 *
 *   Strategy
-*   1. Brute force
-*   2. Sliding Window:
+*   1. Brute force - lengthOfLongestSubstringBF(std::string s)
+*   2. Sliding Window - lengthOfLongestSubstringSW(std::string s) 
 *
 *
 *
@@ -56,16 +56,8 @@
 class Solution 
 {
 public:
-    int lengthOfLongestSubstring(std::string s) 
-    {   
-        //Will use hashmap
-           
-
-        return 0
-    }
-
     //Brute force approach
-    int lengthOfLongestSubstring2(std::string s) {
+    int lengthOfLongestSubstringBF(std::string s) {
         int n = s.length();
 
         int res = 0;
@@ -80,6 +72,7 @@ public:
         return res;
     }
 
+    //Utility Function for lengthOfLongestSubstring2()
     bool checkRepetition(std::string& s, int start, int end) {
         std::vector<int> chars(128);
 
@@ -119,7 +112,6 @@ public:
 
         return res;
     }
-
 };
 
 
@@ -151,13 +143,8 @@ int main()
 
             //Strategy 2
             std::cout << "\nAlternative method:   Length = ";
-            std::cout << sol.lengthOfLongestSubstring2(lineBuffer); 
+            std::cout << sol.lengthOfLongestSubstringBF(lineBuffer); 
             std::cout << "\n";   
-
-            //Strategy 3
-            std::cout << "Another Alternative method:   Length = ";
-            std::cout << sol.lengthOfLongestSubstring(lineBuffer); 
-            std::cout << "\n\n";     
         }
     }
     return 0;
