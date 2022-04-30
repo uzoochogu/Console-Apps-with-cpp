@@ -48,18 +48,61 @@ Sample Output
 23
 4
 56
+
+Testing:
+I implemented a test file for this project. The test cases are added there.
 */
 
 
-#include <iostream>
-#include <string>
 #include <sstream>
+#include <vector>
+#include <iostream>
+#include <fstream>
+using namespace std;
 
-
-int main()
+vector<int> parseInts(string str) 
 {
+	// Complete this function
+    stringstream ss{str};
+    vector<int> values;
+    int num_buf = {}; 
+    char ch = {}; //storage area for discarded commas
 
+    while(ss >> num_buf)
+    {
+        values.push_back(num_buf);
+        ss >> ch;
+    }
 
+    return values;
+}
 
+//driver code
+//I made made my custom test environment so that test cases can be put in a file
+int main() 
+{
+    std::fstream testFile("test_for_StringStream_Challenge.txt", std::ios::in); 
+
+    //check if it opens
+    if (!testFile.is_open()) 
+    {
+        std::cout << "failed to open " << "test_for_StringStream_Challenge.txt" << '\n';
+    } 
+    else
+    {
+        for( std::string lineBuffer ;std::getline(testFile, lineBuffer);) //keep reading the file
+        {
+            string str{lineBuffer};
+            //cin >> str; //Use this to give user defined input or rather add to the test file
+            vector<int> integers = parseInts(str);
+            std::cout << "\nOutput:\n";
+            for(int i = 0; i < integers.size(); i++) 
+            {
+                cout << integers[i] << "\n";
+            }
+
+        }       
+        
+    }    
     return 0;
 }
