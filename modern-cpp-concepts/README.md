@@ -9,6 +9,33 @@ I will start from pretty basic things from the old cpp and ramp up quickly as ti
 ## Topics Discussed
 1. Abstract Base Class
 2. Functors (Function Objects)
+3. std::format module (WIP)
+4. std::number module (I'll also talk about the <limits> module)
+
+
+Note: 
+Compiling C++20 is difficult and support for modules is experimental and stressful. 
+For now GCC 11.0+ supports a lot of C++20 features but MSVC supports more features. I will expand on guide later on.
+
+
+### Compiling C++20 code with MSVC
+1. You need to install Visual studio 2022 and the C++ Desktop Development tool using the Visual Studio Installer. A lighter installation is to just install the MSVC Build Tools (msvc 14.31+)
+
+2. In your code you can add this import statement to import all the core std modules.
+```c++
+ import std.core
+ ```
+
+3. Open "Developer Command Prompt for VS 2022" or "Developer Powershell for VS 2022" from the start menu
+or see this [link](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170) for compiling it by yourself. 
+
+4. Use the following flags (replace the name of file as needed)
+```powershell
+cl /std:c++20 /experimental:module /EHsc /MD the_std_format.cpp
+```
+*Notes*
+1. You can use /std:latest 
+
 
 
 ## Influences and References
@@ -18,3 +45,8 @@ I will start from pretty basic things from the old cpp and ramp up quickly as ti
 3. Javid9x (OneLoneCoder) videos
 4. Learn Advanced C++ Programming - Advenced C (YouTube Channel)
 5. Dmitry Nesteruk- Design Patterns and Modern CPP
+6. Jason Turner YouTube Channel
+7. Rainer Grimm
+8. CopperSpice YouTube Channel
+9. The Cherno YouTube Channel
+
