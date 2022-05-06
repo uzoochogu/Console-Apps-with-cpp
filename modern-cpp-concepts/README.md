@@ -27,7 +27,18 @@ For now GCC 11.0+ supports a lot of C++20 features but MSVC supports more featur
  ```
 
 3. Open "Developer Command Prompt for VS 2022" or "Developer Powershell for VS 2022" from the start menu
-or see this [link](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170) for compiling it by yourself. 
+or see this [link](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170) for more information and for example, using it within your own command line instance. 
+ 
+```powershell
+cd "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build"`
+```
+Then you enter this command: vcvarsall.bat [architecture] [platform_type] [winsdk_version] [-vcvars_ver=vcversion] [spectre_mode]
+(Check [here](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170) for the default values and other options)
+
+For example
+```powershell
+.\vcvarsall.bat x86
+```
 
 4. Use the following flags (replace the name of file as needed)
 ```powershell
