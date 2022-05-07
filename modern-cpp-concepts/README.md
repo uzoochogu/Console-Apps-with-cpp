@@ -1,10 +1,10 @@
-# What is this repo anbout?
+# What is this repo for?
 
-I hopped back on C++ after 2 years away from it and discovered that I didn't know about the Modern CPP concept.
+I hopped back on C++ after 2 years away from it and discovered a similar, yet different and beautiful language called Modern C++.
 
-Here I would go over some of the concepts and try to write simple programs demonstrating them. I will be using the latest C++20 standards (which includes C++11, 14, 17 standards)
+Here I would go over some of the Modern C++ concepts and try to write simple programs demonstrating them. I will be using the latest C++20 standards (which includes C++11, 14, 17 standards). 
 
-I will start from pretty basic things from the old cpp and ramp up quickly as time progresses. 
+I will start from pretty basic things from the old cpp and ramp up quickly as time progresses. Note that the codes are heavily commented on (which may not be a good practice but serves a pedagogic purpose).
 
 ## Topics Discussed
 1. Abstract Base Class
