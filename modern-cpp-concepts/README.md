@@ -23,7 +23,7 @@ For now GCC 11.0+ supports a lot of C++20 features but MSVC supports more featur
 
 2. In your code you can add this import statement to import all the core std modules.
 ```c++
- import std.core
+ import std.core;
  ```
 
 3. Open "Developer Command Prompt for VS 2022" or "Developer Powershell for VS 2022" from the start menu
@@ -47,8 +47,8 @@ cl /std:c++20 /experimental:module /EHsc /MD the_std_format.cpp
 *Notes*
 1. You can use /std:latest 
 2. For VS Code fans, two very useful articles (actualy the same article) for using "Developer Command Prompt for VS 2022" as the integrated terminal are:
-- i. [Configure VS Code for Microsoft C++](https://code.visualstudio.com/docs/cpp/config-msvc) 
-- ii. [Run VS Code outside the Developer Command Prompt](https://code.visualstudio.com/docs/cpp/config-msvc#_run-vs-code-outside-the-developer-command-prompt) - This configures the VS Code tasks.json file.
+- [Configure VS Code for Microsoft C++](https://code.visualstudio.com/docs/cpp/config-msvc) 
+- [Run VS Code outside the Developer Command Prompt](https://code.visualstudio.com/docs/cpp/config-msvc#_run-vs-code-outside-the-developer-command-prompt) - This configures the VS Code tasks.json file.
 
 <p>
 The simplest method which is discussed in the first part of the article is to run "Developer Command Prompt for VS 2022" program from the start menu then navigate to your project directory and run `code` command to open VS code in that working directory using the correct environment variables. You can test this terminal by runing `cl` command to check if exists in that environment.
