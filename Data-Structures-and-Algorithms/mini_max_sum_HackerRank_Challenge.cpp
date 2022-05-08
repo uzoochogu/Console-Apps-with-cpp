@@ -10,9 +10,6 @@ The function prints 16 24
 
 #include <iostream>
 #include <vector>
-#include <string>
-
-using namespace std;
 
 /*
  * Complete the 'miniMaxSum' function below.
@@ -20,7 +17,7 @@ using namespace std;
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
-void miniMaxSum(vector<int> arr) {
+void miniMaxSum(std::vector<int> arr) {
 
     long max{0}, min, sum{0};
     for(auto i:arr)
