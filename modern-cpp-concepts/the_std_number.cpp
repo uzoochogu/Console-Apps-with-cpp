@@ -1,5 +1,7 @@
 import std.core;
 
+
+
 int main()
 {
     //Area of circle
