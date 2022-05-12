@@ -61,11 +61,11 @@ The simplest method which is discussed in the first part of the article is to ru
 
 1. Beginning C++20 From Novice to Professional Sixth Edition by Ivor Horton and Peter Van Weert
 2. Bjarne Stroustrop's The C++ Programming language
-3. Javid9x (OneLoneCoder) videos
-4. Learn Advanced C++ Programming - Advenced C (YouTube Channel)
-5. Dmitry Nesteruk- Design Patterns and Modern CPP
-6. Jason Turner YouTube Channel
+3. [Javidx9 (OneLoneCoder) videos](https://www.youtube.com/c/javidx9)
+4. Learn Advanced C++ Programming - [Advenced C (YouTube Channel)](https://www.youtube.com/channel/UCkcrsZxo0eTpPhBG7Rugs-Q)
+5. [Dmitry Nesteruk- Design Patterns and Modern CPP](https://www.youtube.com/watch?v=j9arNRRoPe8)
+6. [Cpp Weekly with Jason Turner](https://www.youtube.com/c/lefticus1)
 7. Rainer Grimm
-8. CopperSpice YouTube Channel
-9. The Cherno YouTube Channel
+8. [CopperSpice YouTube Channel](https://www.youtube.com/c/CopperSpice)
+9. [The Cherno YouTube Channel](https://www.youtube.com/c/TheChernoProject)
 
