@@ -15,7 +15,16 @@ I needed to use the following flags and the msvc 14.31
 int main()
 {
     const int fish_count {100};
-    const float pond_diameter {15.5f};
+    const float pond_diameter {15.5342f};
+
+
+    //Old style formatting
+    std::cout << "Pond diameter required for " << fish_count << " fish is "
+    << std::setprecision(2)                                                     // Use two significant digits
+    << pond_diameter << " feet.\n";                                             // Output value is 16 (it is rounded).
+
+
+    //using the std::format
 
     std::cout << std::format("Pond diameter required for {} fish is {} feet.\n", fish_count, pond_diameter);  
 
