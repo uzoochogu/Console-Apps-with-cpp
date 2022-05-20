@@ -1,8 +1,8 @@
-//Testing modules and std::format
+//Testing the <format> and <limit> modules
 //import <iostream>;  //I'll use these when they are fully supported
 //import <format>;
 
-import std.core;  
+import std.core;     //We're using this temporarily
 
 /*
 The above header file gives me experimental support for <iostream> and <format> modules
@@ -96,6 +96,20 @@ int main()
               << std::format("The positive range for type long double is from {} to {}\n",
                               std::numeric_limits<long double>::min(),
                               std::numeric_limits<long double>::max());
+
+
+    //Retrieving other properties of fundamental types
+    std::cout << std::format("\n\nThe number of bits in the mantissa of a float is {} \n",std::numeric_limits<float>::digits);
+    std::cout << std::format("The number of bits in the value of a signed int(excluding sign bit) is {} \n",std::numeric_limits<int>::digits);
+
+    //TODO
+    //Add code to find out what the range of the exponent component of floating-point values is, whether a type is signed or not, and so on.
+
+    //To obtain the special floating-point values for infinity and not-a-number (NaN)
+    std::cout << std::format("\n\nPositive Infinity:  {}\n",std::numeric_limits<float>::infinity());
+    std::cout << std::format("Negative Infinity:  {}\n", -std::numeric_limits<double>::infinity());
+    std::cout << std::format("Not-A-Number (NaN):  {}\n", std::numeric_limits<long double>::quiet_NaN());
+
 
     return 0;
 }
