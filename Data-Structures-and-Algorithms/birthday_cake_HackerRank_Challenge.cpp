@@ -39,13 +39,9 @@ Candle heights are [3, 2, 1, 3]. The tallest candles are  units, and there are  
 
 */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
-using namespace std;
-
-string ltrim(const string &);
-string rtrim(const string &);
-vector<string> split(const string &);
 
 /*
  * Complete the 'birthdayCakeCandles' function below.
@@ -54,7 +50,7 @@ vector<string> split(const string &);
  * The function accepts INTEGER_ARRAY candles as parameter.
  */
 
-int birthdayCakeCandles(vector<int> candles) {
+int birthdayCakeCandles(std::vector<int> candles) {
     int max{0}, count{0};
     for(auto i:candles)
     {
@@ -69,72 +65,24 @@ int birthdayCakeCandles(vector<int> candles) {
 
 }
 
+//Driver code
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
-    string candles_count_temp;
-    getline(cin, candles_count_temp);
-
-    int candles_count = stoi(ltrim(rtrim(candles_count_temp)));
-
-    string candles_temp_temp;
-    getline(cin, candles_temp_temp);
-
-    vector<string> candles_temp = split(rtrim(candles_temp_temp));
-
-    vector<int> candles(candles_count);
-
-    for (int i = 0; i < candles_count; i++) {
-        int candles_item = stoi(candles_temp[i]);
-
-        candles[i] = candles_item;
+    int number{0};
+    std::vector<int> birthday_cakes;
+    std::cout << "Input Test case (Input a letter to stop input): ";
+    
+    while (std::cin >> number)
+    {
+        birthday_cakes.push_back(number);
     }
+    std::cout << "\nYour input is: ";
 
-    int result = birthdayCakeCandles(candles);
-
-    fout << result << "\n";
-
-    fout.close();
+    for(auto i: birthday_cakes)
+    {
+        std::cout << i << " ";
+    }
+    std::cout << "\nThe number of blown candles are: " << birthdayCakeCandles(birthday_cakes);
 
     return 0;
-}
-
-string ltrim(const string &str) {
-    string s(str);
-
-    s.erase(
-        s.begin(),
-        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
-    );
-
-    return s;
-}
-
-string rtrim(const string &str) {
-    string s(str);
-
-    s.erase(
-        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
-        s.end()
-    );
-
-    return s;
-}
-
-vector<string> split(const string &str) {
-    vector<string> tokens;
-
-    string::size_type start = 0;
-    string::size_type end = 0;
-
-    while ((end = str.find(" ", start)) != string::npos) {
-        tokens.push_back(str.substr(start, end - start));
-
-        start = end + 1;
-    }
-
-    tokens.push_back(str.substr(start));
-
-    return tokens;
 }
