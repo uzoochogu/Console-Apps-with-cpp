@@ -13,14 +13,10 @@ I needed to use the following flags and the msvc 14.31
 //To check for signed and unsigned types
 template <typename T> struct test {
     test(const char* name, int w = 15) {
-        std::cout
-            << std::left << std::setw(w)
-            << (std::numeric_limits<T>::is_specialized ? name : "non-specialized")
-            << " : "
-            << (std::numeric_limits<T>::is_signed ? "" : "un") << "signed\n";
-            << std::format("")
+        std::cout << std::format("{:<15} : {}signed\n", (std::numeric_limits<T>::is_specialized ? name : "non-specialized"),
+                                                        (std::numeric_limits<T>::is_signed ? "" : "un"));
     }
-}
+};
 
 int main()
 {
@@ -114,9 +110,9 @@ int main()
 
     //Range of the exponent component of floating-point values 
     std::cout << std::format("\n\nMaximum Float exponent:  {}\n",std::numeric_limits<float>:: max_exponent);
-    std::cout << std::format("\nMinimum Float exponent:  {}\n",std::numeric_limits<float>:: min_exponent);
+    std::cout << std::format("Minimum Float exponent:  {}\n\n",std::numeric_limits<float>:: min_exponent);
 
-    //Signed or Not
+    //Signed or Not -> See Struct Template Constructor
     test<bool>{"bool"};
     test<char>{"char"};
     test<wchar_t>{"wchar_t"};
