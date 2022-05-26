@@ -10,7 +10,17 @@ I needed to use the following flags and the msvc 14.31
 'cl /std:c++20 /experimental:module /EHsc /MD the_std_format.cpp'
 */
 
-
+//To check for signed and unsigned types
+template <typename T> struct test {
+    test(const char* name, int w = 15) {
+        std::cout
+            << std::left << std::setw(w)
+            << (std::numeric_limits<T>::is_specialized ? name : "non-specialized")
+            << " : "
+            << (std::numeric_limits<T>::is_signed ? "" : "un") << "signed\n";
+            << std::format("")
+    }
+}
 
 int main()
 {
@@ -102,8 +112,27 @@ int main()
     std::cout << std::format("\n\nThe number of bits in the mantissa of a float is {} \n",std::numeric_limits<float>::digits);
     std::cout << std::format("The number of bits in the value of a signed int(excluding sign bit) is {} \n",std::numeric_limits<int>::digits);
 
-    //TODO
-    //Add code to find out what the range of the exponent component of floating-point values is, whether a type is signed or not, and so on.
+    //Range of the exponent component of floating-point values 
+    std::cout << std::format("\n\nMaximum Float exponent:  {}\n",std::numeric_limits<float>:: max_exponent);
+    std::cout << std::format("\nMinimum Float exponent:  {}\n",std::numeric_limits<float>:: min_exponent);
+
+    //Signed or Not
+    test<bool>{"bool"};
+    test<char>{"char"};
+    test<wchar_t>{"wchar_t"};
+    test<char16_t>{"char16_t"};
+    test<char32_t>{"char32_t"};
+    test<float>{"float"};
+    struct delusion{};
+    test<delusion>{"delusion"};
+    test<decltype(42)>{"decltype(42)"};
+
+
+
+
+    std::cout << std::format("\n\nMaximum Float exponent:  {}\n",std::numeric_limits<float>:: max_exponent);
+    std::cout << std::format("\nMinimum Flaot exponent:  {}\n",std::numeric_limits<float>:: min_exponent);
+
 
     //To obtain the special floating-point values for infinity and not-a-number (NaN)
     std::cout << std::format("\n\nPositive Infinity:  {}\n",std::numeric_limits<float>::infinity());
