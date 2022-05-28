@@ -4,6 +4,8 @@
 
 import std.core;     //We're using this temporarily
 
+
+
 /*
 The above header file gives me experimental support for <iostream> and <format> modules
 I needed to use the following flags and the msvc 14.31
@@ -134,6 +136,19 @@ int main()
     std::cout << std::format("\n\nPositive Infinity:  {}\n",std::numeric_limits<float>::infinity());
     std::cout << std::format("Negative Infinity:  {}\n", -std::numeric_limits<double>::infinity());
     std::cout << std::format("Not-A-Number (NaN):  {}\n", std::numeric_limits<long double>::quiet_NaN());
+
+
+    //Processing Unicode: Use char8_t, char16_t etc rather than char and wchar_t for Unicode. 
+/*  char8_t yen {u8'\x0A5'};           // or char8_t yen {u8'¥'};         Initialized with UTF-8 code for the yen sign (¥)
+    auto delta {u'\x0394'};            // or char16_t delta {u16'Δ'};     Initialized with UTF-16 code for Greek Delta (Δ)
+    char32_t ya {U'\x44f'};            // or char32_t ya {U'я'};          Initialized with UTF-32 code for cyrillic letter ya (я)
+    wchar_t cc {L'ç'};                 //or L'\x00E7'
+    
+
+    std::cout << std::vformat("\n\nSome Unicode characters are printed below: \n{}\n{}\n{}\n{}", 
+                                yen, delta, ya, cc);
+//Not currently supported*/
+
 
 
     return 0;
