@@ -10,9 +10,9 @@ I needed to use the following flags and the msvc 14.31
 'cl /std:c++20 /experimental:module /EHsc /MD the_std_format.cpp'
 */
 
-//To check for signed and unsigned types
+//A Template check for signed and unsigned types
 template <typename T> struct test {
-    test(const char* name, int w = 15) {
+    test(const char* name) {
         std::cout << std::format("{:<15} : {}signed\n", (std::numeric_limits<T>::is_specialized ? name : "non-specialized"),
                                                         (std::numeric_limits<T>::is_signed ? "" : "un"));
     }
@@ -119,13 +119,13 @@ int main()
     test<char16_t>{"char16_t"};
     test<char32_t>{"char32_t"};
     test<float>{"float"};
-    struct delusion{};
-    test<delusion>{"delusion"};
+    struct delusion{};              //User Defined type 
+    test<delusion>{"delusion"};     //Non-specialized type
     test<decltype(42)>{"decltype(42)"};
 
 
 
-
+    //For the maximum float exponent
     std::cout << std::format("\n\nMaximum Float exponent:  {}\n",std::numeric_limits<float>:: max_exponent);
     std::cout << std::format("\nMinimum Flaot exponent:  {}\n",std::numeric_limits<float>:: min_exponent);
 
