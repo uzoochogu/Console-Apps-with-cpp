@@ -9,8 +9,9 @@ I will start from pretty basic things from the old cpp and ramp up quickly as ti
 ## Topics Discussed
 1. Abstract Base Class
 2. Functors (Function Objects)
-3. std::format module (WIP)
-4. std::number module (I'll also talk about the <limits> module)
+3. std::format module 
+4. std::number module (I'll also talk about the `<limits>` module)
+5. Using Aliases
 
 
 Note: 
@@ -67,5 +68,8 @@ The simplest method which is discussed in the first part of the article is to ru
 6. [Cpp Weekly with Jason Turner](https://www.youtube.com/c/lefticus1)
 7. Rainer Grimm
 8. [CopperSpice YouTube Channel](https://www.youtube.com/c/CopperSpice)
-9. [The Cherno YouTube Channel](https://www.youtube.com/c/TheChernoProject)
+9. [The Cherno YouTube Channel](https://www.youtube.com/c/TheChernoProject
+10. Microsoft Docs (C++)
+ - [Visual Studio and C++](https://docs.microsoft.com/en-us/cpp/overview/visual-cpp-in-visual-studio?view=msvc-170)
+ - [C++ Language Documentation](https://docs.microsoft.com/en-us/cpp/cpp/?view=msvc-170)
 
