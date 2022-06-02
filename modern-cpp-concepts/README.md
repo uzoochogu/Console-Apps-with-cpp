@@ -12,6 +12,7 @@ I will start from pretty basic things from the old cpp and ramp up quickly as ti
 3. std::format module 
 4. std::number module (I'll also talk about the `<limits>` module)
 5. Using Aliases
+6. Constexpr variables and functions.
 
 
 Note: 
