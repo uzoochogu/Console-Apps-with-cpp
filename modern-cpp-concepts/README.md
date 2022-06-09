@@ -57,6 +57,18 @@ The simplest method which is discussed in the first part of the article is to ru
 </p>
 
 
+## Alternative:
+Run CMake and configure a solution file for yourself. The previous Visual studio requirements still hold. As other compilers support C++20, I would add support for them.
+
+### Generating a Solution File
+Run the Following:
+```powershell
+cmake .
+```
+```powershell
+cmake --build .
+```
+
 
 
 ## Influences and References
