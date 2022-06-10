@@ -37,5 +37,10 @@ if (MSVC)
     target_compile_options(the_std_number PRIVATE /experimental:module /EHsc /MD)
 endif()
 
+add_executable(bitwise_operators bitwise_operators.cpp)
+if (MSVC)
+    target_compile_options(bitwise_operators PRIVATE /experimental:module /EHsc /MD)
+endif()
+
 
 
