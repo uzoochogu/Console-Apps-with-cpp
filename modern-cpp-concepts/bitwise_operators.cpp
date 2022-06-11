@@ -32,8 +32,8 @@ int main()
     unsigned int bit20mask{ 1u << 19 }; // Selects bit 20
 
     std::cout << "Use masks to select or set a particular flag bit:\n";
-    std::cout << std::format("Select bit 1 from flags : {:08X}\n", flags & bit1mask);
-    std::cout << std::format("Select bit 6 from flags : {:08X}\n", flags & bit6mask);
-    std::cout << std::format("Switch off bit 6 in flags: {:08X}\n", flags &= ~bit6mask);
-    std::cout << std::format("Switch on bit 20 in flags: {:08X}\n", flags |= bit20mask);
+    std::cout << std::format("Select bit 1 from flags :  {:032B}\n", flags & bit1mask);
+    std::cout << std::format("Select bit 6 from flags :  {:032B}\n", flags & bit6mask);
+    std::cout << std::format("Switch off bit 6 in flags: {:032B}\n", flags &= ~bit6mask);
+    std::cout << std::format("Switch on bit 20 in flags: {:032B}\n", flags |= bit20mask);
     }
