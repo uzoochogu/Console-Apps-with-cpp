@@ -7,10 +7,11 @@ I have also solved many Leetcode problems here, complete with an interface for t
 This repositary consists of 
 1. Data Structure and Algorithms: Implemented common Data Structures, Algorithms and solved LeetCode Problems
 2. Modern cpp concepts: C++17, C++20 tools, Design Principles examples and Good Programming Practices
-3. Some standalone CLI projects in C++ or C (😁) : Old repo containing my earliest C++ programs
+3. Some standalone CLI projects in C++ and C (😁) : Consult Price Register is an Old repo containing my earliest C++ programs. It consists of two separate programs:
+   > - A Price Register that stores the prices of items in a store in a simple text file.
+   > - Code generator - This generates a voucher code that can be submitted to redeem unpaid change. The time of purchase and price of item is encoded using a crude encoding technique.
 
 
-Author: Uzo Ochogu
 
 
 
@@ -19,13 +20,19 @@ Author: Uzo Ochogu
 2. Two sum
 3. Windows Recent Files feature - (I was asked this in a recent interview)
 4. Longest substring with non-repeating characters
+5. Sudoku Solver
+6. Closest coin
+7. Add Two numbers
 
 ### Planned challenges to solve
-1. Sudoku Solver
-2. Valid Sudoku
-3. Unique Binary Search Trees I&II
-
+1. Valid Sudoku
+2. Unique Binary Search Trees I&II
 
 ### HackerRank Challenges
 1. Mini-max
 2. Stdin
+3. Lonely Integer
+4. Birthday Cake
+ 
+
+Author: Uzo Ochogu
