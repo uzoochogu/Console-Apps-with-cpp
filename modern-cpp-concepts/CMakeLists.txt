@@ -9,7 +9,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 
+#source files
+set(source_files "1_abstract_base_class" "constexpr_keyword" 
+                 "modern_memory_mgmt"    "the_std_format" 
+                 "the_std_number"        "bitwise_operators" STRING)
 
+list(LENGTH source_files listLength)
+math(EXPR lastIndex "${listLength} - 1")
+foreach(i RANGE 0 ${lastIndex})
+    list(GET source_files ${i} a)
+    add_executable("${a}" ""${a}".cpp")
+    if (MSVC)
+    target_compile_options("${a}" PRIVATE /experimental:module /EHsc /MD)
+endforeach()
+
+
+
+#[[[ Old Code
 
 #executables
 add_executable(1_abstract_base_class 1_abstract_base_class.cpp)
@@ -41,6 +57,8 @@ add_executable(bitwise_operators bitwise_operators.cpp)
 if (MSVC)
     target_compile_options(bitwise_operators PRIVATE /experimental:module /EHsc /MD)
 endif()
+
+]]]#
 
 
 
