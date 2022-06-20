@@ -12,61 +12,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #source files
 set(source_files "1_abstract_base_class" "constexpr_keyword" 
                  "modern_memory_mgmt"    "the_std_format" 
-                 "the_std_number"        "bitwise_operators" STRING)
+                 "the_std_number"        "bitwise_operators")
 
 #executables
 foreach(File IN LISTS source_files)
-    add_executable("${File}" ""${File}".cpp")
+    add_executable("${File}" ${File}.cpp)
     if (MSVC)
-    target_compile_options("${File}" PRIVATE /experimental:module /EHsc /MD)
+        target_compile_options("${File}" PRIVATE /experimental:module /EHsc /MD)
+    endif()
 endforeach()
     
 
  
-#Old implementation 
- 
-# list(LENGTH source_files listLength)
-# math(EXPR lastIndex "${listLength} - 1")
-# foreach(i RANGE 0 ${lastIndex})
-#     list(GET source_files ${i} a)
-#     add_executable("${a}" ""${a}".cpp")
-#     if (MSVC)
-#     target_compile_options("${a}" PRIVATE /experimental:module /EHsc /MD)
-# endforeach()
 
 
-
-
-#executables
-#add_executable(1_abstract_base_class 1_abstract_base_class.cpp)
-#if (MSVC)
-#    target_compile_options(1_abstract_base_class PRIVATE /experimental:module /EHsc /MD)
-#endif()
-
-# add_executable(constexpr_keyword constexpr_keyword.cpp)
-# if (MSVC)
-#     target_compile_options(constexpr_keyword PRIVATE /experimental:module /EHsc /MD)
-# endif()
-
-# add_executable(modern_memory_mgmt modern_memory_mgmt.cpp)
-# if (MSVC)
-#     target_compile_options(modern_memory_mgmt PRIVATE /experimental:module /EHsc /MD)
-# endif()
-
-# add_executable(the_std_format the_std_format.cpp)
-# if (MSVC)
-#     target_compile_options(the_std_format PRIVATE /experimental:module /EHsc /MD)
-# endif()
-
-# add_executable(the_std_number the_std_number.cpp)
-# if (MSVC)
-#     target_compile_options(the_std_number PRIVATE /experimental:module /EHsc /MD)
-# endif()
-
-# add_executable(bitwise_operators bitwise_operators.cpp)
-# if (MSVC)
-#     target_compile_options(bitwise_operators PRIVATE /experimental:module /EHsc /MD)
-# endif()
 
 
 
