@@ -81,8 +81,10 @@ cmake --build .
 6. [Cpp Weekly with Jason Turner](https://www.youtube.com/c/lefticus1)
 7. Rainer Grimm
 8. [CopperSpice YouTube Channel](https://www.youtube.com/c/CopperSpice)
-9. [The Cherno YouTube Channel](https://www.youtube.com/c/TheChernoProject
+9. [The Cherno YouTube Channel](https://www.youtube.com/c/TheChernoProject)
 10. Microsoft Docs (C++)
  - [Visual Studio and C++](https://docs.microsoft.com/en-us/cpp/overview/visual-cpp-in-visual-studio?view=msvc-170)
  - [C++ Language Documentation](https://docs.microsoft.com/en-us/cpp/cpp/?view=msvc-170)
+
+11. C++ Design Patterns: Creational- LinkedIn Learning Tutorial by Olivia Chiu Stone.
 
