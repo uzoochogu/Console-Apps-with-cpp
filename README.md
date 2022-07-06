@@ -23,6 +23,8 @@ This repositary consists of
 5. Sudoku Solver
 6. Closest coin
 7. Add Two numbers
+8. Check For Balanced Parentheses
+9. Longest Palindromic substring
 
 ### Planned challenges to solve
 1. Valid Sudoku
@@ -33,6 +35,7 @@ This repositary consists of
 2. Stdin
 3. Lonely Integer
 4. Birthday Cake
+5. CanSum
  
 
 Author: Uzo Ochogu
