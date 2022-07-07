@@ -31,8 +31,57 @@ double opr(char opr, int op1, int op2 )
     }
     return result;
 }
+enum OperatorsPrecedence
+{
+    multiply = 13,
+    divide = 13,
+    plus = 12,
+    subtract = 12
+};
 
-bool isHigherPrecedence(char opr1, char opr2);
+bool isHigherPrecedence(char opr1, char opr2)
+{
+    OperatorsPrecedence op1, op2;
+    switch(opr1)
+    {
+        case '*':
+        op1 = multiply;
+        break;
+
+        case '/':
+        op1 = divide;
+        break;
+
+        case '+':
+        op1 = plus;
+        break;
+
+        case '-':
+        op1 = subtract;
+        break;
+    }
+
+    switch(opr2)
+    {
+        case '*':
+        op2 = multiply;
+        break;
+
+        case '/':
+        op2 = divide;
+        break;
+
+        case '+':
+        op2 = plus;
+        break;
+
+        case '-':
+        op2 = subtract;
+        break;
+    }
+
+    op1 > op2? true: false;    
+}
 
 std::string postfixEvaluator(std::string expr);
 
