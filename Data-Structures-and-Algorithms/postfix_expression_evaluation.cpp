@@ -1,8 +1,13 @@
 /*
 This program evaluates a given Postfix expression
+
+Limitations:
+1. Only single digits are evaluated
+2. + - * / are the only supported operators
 */
 #include <iostream>
 #include <string>
+#include <stack>
 
 double opr(char opr, int op1, int op2 )
 {
@@ -83,8 +88,39 @@ bool isHigherPrecedence(char opr1, char opr2)
     op1 > op2? true: false;    
 }
 
-std::string postfixEvaluator(std::string expr);
+bool isOperator(char s)
+{
+    if( s == '*' || s == '/'  || s == '+' || s == '-')
+        return true;
+    else
+        return false;
+}
 
+bool isOperand(char s)
+{
+    if( s > 47 && s < 58)
+        return true;
+    else
+        return false;
+}
+
+double postfixEvaluator(std::string expr)
+{
+    std::stack<char> s;
+    double buf, result;
+    int oprnd1, oprnd2;
+
+    for(unsigned int i = 0; i < expr.size(); i++ )
+    {
+        if(isOperand(expr[i]))
+            oprnd1 = expr[i];
+        
+
+    } 
+
+
+
+}
 int main()
 {
     std::cout << "Evaluation of PostFix Expressions:\n" << "\n"; 
