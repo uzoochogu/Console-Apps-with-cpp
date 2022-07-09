@@ -109,18 +109,48 @@ double postfixEvaluator(std::string expr)
     std::stack<char> s;
     double buf, result;
     int oprnd1, oprnd2;
+    std::string postfix;
 
     for(unsigned int i = 0; i < expr.size(); i++ )
     {
         if(isOperand(expr[i]))
-            oprnd1 = expr[i];
+            postfix.push_back(expr[i]);
+        
+        else if(isOperator(expr[i]))
+        {
+            while(!s.empty() && s.top() != '(' && isHigherPrecedence(s.top(), expr[i]) )
+            {
+                postfix.push_back(s.top());
+            }
+        }
+
+        else if(expr[i] == '(')
+            s.push(expr[i]);
+        
+        else if(expr[i] == ')')
+        {
+            while(!s.empty() && s.top() != '(')
+            {
+                postfix.push_back(s.top());
+                s.pop();
+            }
+        }
+
+        while(!s.empty())
+        {
+            postfix.push_back(s.top());
+            s.pop();
+        }
+
+
         
 
     } 
 
-
-
+    return result;
 }
+
+
 int main()
 {
     std::cout << "Evaluation of PostFix Expressions:\n" << "\n"; 
