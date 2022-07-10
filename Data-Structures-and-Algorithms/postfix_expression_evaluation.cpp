@@ -140,12 +140,32 @@ double postfixEvaluator(std::string expr)
         {
             postfix.push_back(s.top());
             s.pop();
-        }
-
-
-        
+        }       
 
     } 
+
+    oprnd1 = std::stod(std::string{postfix[0]});
+    
+    for(unsigned int i = 1; i < postfix.size(); i++)
+    {
+        int checker{postfix.size()- 1};
+        char operatorName;
+        if(isOperand(postfix[i]))
+        {
+            while(isOperator(postfix[checker]))
+            {
+                operatorName = postfix[checker];
+                checker--;
+            }
+            oprnd2 = std::stod(std::string{postfix[i]});
+
+            oprnd1 = opr(operatorName, oprnd1, oprnd2);
+
+            postfix.erase(postfix.begin()+ checker);
+        }
+    }
+
+    result = oprnd1;
 
     return result;
 }
