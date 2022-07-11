@@ -85,7 +85,7 @@ bool isHigherPrecedence(char opr1, char opr2)
         break;
     }
 
-    op1 > op2? true: false;    
+    return op1 > op2? true: false;    
 }
 
 bool isOperator(char s)
@@ -107,7 +107,7 @@ bool isOperand(char s)
 double postfixEvaluator(std::string expr)
 {
     std::stack<char> s;
-    double buf, result;
+    double buf, result{0};
     int oprnd1, oprnd2;
     std::string postfix;
 
@@ -143,8 +143,22 @@ double postfixEvaluator(std::string expr)
         }       
 
     } 
+    for(auto i : postfix)
+        std::cout << i << "\n";
 
-    oprnd1 = std::stod(std::string{postfix[0]});
+    std::cout << postfix.size() << "\n";
+
+    //std::stack<char> g{s};
+
+    /*
+    while(!g.empty())
+    {
+        std::cout << g.top() << "\n";
+        g.pop();
+    }
+     */
+
+    /* oprnd1 = std::stod(std::string{postfix[0]});
     
     for(unsigned int i = 1; i < postfix.size(); i++)
     {
@@ -165,7 +179,7 @@ double postfixEvaluator(std::string expr)
         }
     }
 
-    result = oprnd1;
+    result = oprnd1; */
 
     return result;
 }
@@ -175,8 +189,8 @@ int main()
 {
     std::cout << "Evaluation of PostFix Expressions:\n" << "\n"; 
     std::cout << "2*3+5*4-9:     " << postfixEvaluator("2*3+5*4-9") << "\n";       //17
-    std::cout << "2*3+5:         " << postfixEvaluator("2*3+5") << "\n";           //11
-    std::cout << "((5+3)*4-5)*6: " << postfixEvaluator("2*3+5*4-9") << "\n";       //162
+    //std::cout << "2*3+5:         " << postfixEvaluator("2*3+5") << "\n";           //11
+    //std::cout << "((5+3)*4-5)*6: " << postfixEvaluator("2*3+5*4-9") << "\n";       //162
 
     return 0;
 }
