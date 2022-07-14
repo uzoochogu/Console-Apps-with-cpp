@@ -49,7 +49,7 @@ int main()
                 //Iterative Search
                 cout << "ITERATIVE SEARCH: "; 
                 new_node = bst.iterativeSearch(val);
-                if (new_node != NULL) 
+                if (new_node != nullptr) 
                 {
                     cout << "Value found" << endl;
                 } 
@@ -61,7 +61,7 @@ int main()
                 //Recursive Search
                 cout << "RECURSIVE SEARCH: "; 
                 new_node = bst.recursiveSearch(bst.root, val);
-                if (new_node != NULL) 
+                if (new_node != nullptr) 
                 {
                     cout << "Value found" << endl;
                 } 
@@ -81,7 +81,7 @@ int main()
 
                 //Check if Node exists
                 new_node = bst.iterativeSearch(val);
-                if(new_node != NULL)
+                if(new_node != nullptr)
                 {
                     bst.deleteNode(bst.root, val);
                     cout << "Value Deleted" << endl;
