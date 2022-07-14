@@ -14,14 +14,14 @@ class TreeNode
         TreeNode()
         {
             value = 0;
-            left = NULL;
-            right = NULL;
+            left = nullptr;
+            right = nullptr;
         }
         TreeNode(int v)
         {
             value = v;
-            left = NULL;
-            right = NULL;
+            left = nullptr;
+            right = nullptr;
         }
 
 };
@@ -30,13 +30,13 @@ class TreeNode
 class BST
 {
     public:
-        TreeNode *root = NULL;
+        TreeNode *root = nullptr;
 
 
         //Checks if the BST is empty or not
         bool isEmpty()
         {
-            if(root==NULL)
+            if(root==nullptr)
                 return true;
             else
                 return false;
@@ -46,7 +46,7 @@ class BST
         //Inserts a node in the binary search tree. Iterative Approach. Space Complexity O(n)
         void insertNode(TreeNode* new_node) 
         {
-            if (root == NULL) 
+            if (root == nullptr) 
             {
                 root = new_node;
                 cout << "Value Inserted as root node!" << endl;
@@ -54,7 +54,7 @@ class BST
             else
             {
                 TreeNode * temp = root;
-                while (temp != NULL) //we traverse 
+                while (temp != nullptr) //we traverse 
                 {
                     if (new_node -> value == temp -> value)  //value already exists
                     {
@@ -63,7 +63,7 @@ class BST
                         return;
                     } 
                     // insert at left node if empty and the value is less than current node's value
-                    else if ((new_node->value < temp->value) && (temp -> left == NULL))  
+                    else if ((new_node->value < temp->value) && (temp -> left == nullptr))  
                     {
                         temp -> left = new_node;
                         cout << "Value Inserted to the left!" << endl;
@@ -75,7 +75,7 @@ class BST
                         temp = temp -> left;
                     } 
                     // insert at right node if empty and the value is less than current node's value
-                    else if ((new_node->value > temp->value) && (temp->right == NULL)) 
+                    else if ((new_node->value > temp->value) && (temp->right == nullptr)) 
                     {
                         temp -> right = new_node;
                         cout << "Value Inserted to the right!" << endl;
@@ -93,7 +93,7 @@ class BST
         //Inserts a node in the binary search tree. Recursive Approach.Space complexity O(H) i.e proportional to Height
         TreeNode* insertRecursive(TreeNode* r, TreeNode *new_node)
         {
-            if(r==NULL)
+            if(r==nullptr)
             {
                 r=new_node;
                 cout <<"Insertion successful"<<endl;
@@ -119,7 +119,7 @@ class BST
         //Prints the content of the tree in a strucured way. Recursive Approach
         void print2D(TreeNode* r, int space) 
         {
-            if (r == NULL) // Base case  1
+            if (r == nullptr) // Base case  1
             {
                 return;
             }
@@ -140,7 +140,7 @@ class BST
         //Prints the content of the Binary Search Tree in a Preorder DFS (Node, Left, Right)
         void printPreorder(TreeNode* r)
         {
-            if(r == NULL)
+            if(r == nullptr)
             {
                 return;
             }
@@ -160,7 +160,7 @@ class BST
         //Prints the content of the Binary Search Tree in a InOrder DFS (Left, Node, Right)
         void printInorder(TreeNode* r)
         {
-            if(r == NULL)
+            if(r == nullptr)
             {
                 return;
             }
@@ -168,7 +168,7 @@ class BST
             //Access the Left Node 
             printInorder(r->left);
 
-            //Access the Node First
+            //Access the Node
             cout << r->value << " ";            
 
             //Access the Right Node
@@ -180,7 +180,7 @@ class BST
         //Prints the content of the Binary Search Tree in a PostOrder DFS (Left, Right, Node)
         void printPostorder(TreeNode* r)
         {
-            if(r == NULL)
+            if(r == nullptr)
             {
                 return;
             }
@@ -191,7 +191,7 @@ class BST
             //Access the Right Node
             printPostorder(r->right);
 
-            //Access the Node First
+            //Access the Node
             cout << r->value << " ";         
         }
 
@@ -199,14 +199,14 @@ class BST
         //Searches the Binary Search tree iteratively.
         TreeNode* iterativeSearch(int v) 
         {
-            if (root == NULL)  //The Tree is empty 
+            if (root == nullptr)  //The Tree is empty 
             {
                 return root;
             }
             else    
             {
                 TreeNode * temp = root; //our investigator pointer
-                while (temp != NULL) 
+                while (temp != nullptr) 
                 {
                     if (v == temp -> value) 
                     {
@@ -221,14 +221,14 @@ class BST
                         temp = temp -> right;
                     }
                 }
-                return NULL; //NULL will indicate that it wasn't found
+                return nullptr; //nullptr will indicate that it wasn't found
             }
         }
 
         //Searches the Binary Search tree  recursively. Arg: (r)Pointer to Node, (v) search term 
         TreeNode* recursiveSearch(TreeNode* r, int val)
         {
-            if (r == NULL || r -> value == val) //r will point to the found search term or NULL 
+            if (r == nullptr || r -> value == val) //r will point to the found search term or nullptr 
             {
                 return r;
             }              
@@ -250,7 +250,7 @@ class BST
         This function computes the height of a node in a BST.*/
         int height(TreeNode* r) 
         {
-            if (r == NULL)
+            if (r == nullptr)
             {
                 return -1; //Height of an empty tree is designated with -1.
             }
@@ -275,7 +275,7 @@ class BST
         /* Print nodes at a given level. Utility function for printLevelOrderBFS(TreeNode* r)*/
         void printGivenLevel(TreeNode* r, int level) 
         {
-            if (r == NULL) //Base Case
+            if (r == nullptr) //Base Case
             {
                 return;
             }
@@ -308,7 +308,7 @@ class BST
             TreeNode* current = node;
 
             //Loop to get leftmost leaf
-            while(current->left != NULL)
+            while(current->left != nullptr)
             {
                 current = current->left;
             }
@@ -316,11 +316,11 @@ class BST
         }
 
 
-        //Delete a node if it exists. Returns deleted node or NULL if not found.
+        //Delete a node if it exists. Returns deleted node or nullptr if not found.
         TreeNode* deleteNode(TreeNode* r, int v)
         {
             //base case
-            if(r == NULL)
+            if(r == nullptr)
             {
                 return r;
             }
@@ -334,14 +334,14 @@ class BST
             }
             else //When a Match is found
             {
-                TreeNode* temp = NULL;
-                if(r->left == NULL) //Node only has a right child OR no child
+                TreeNode* temp = nullptr;
+                if(r->left == nullptr) //Node only has a right child OR no child
                 {
                     temp = r->right;
                     delete r;
                     return temp;
                 }
-                else if(r->right == NULL) //Node with only left child
+                else if(r->right == nullptr) //Node with only left child
                 {
                     temp = r->left ;
                     delete r;
