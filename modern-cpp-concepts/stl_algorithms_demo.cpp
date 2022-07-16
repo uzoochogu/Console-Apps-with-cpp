@@ -42,7 +42,16 @@ int main()
     //std::stable_sort in <algorithm>
     std::cout << "\nstd::stable_sort:\n";
     std::stable_sort(animals.begin(), animals.end(), sortByLength);
-    print(animals); //outputs ant, cat, dog, moth, mouse, elephant
+    print(animals); //outputs: ant, cat, dog, moth, mouse, elephant
+
+
+    //std::binary_search
+    std::binary_search(animal.begin(), animal.end(), "ant");   //true
+
+    //std::lower_bound
+
+    //std::upper_bound
+
     
 
     std::cin.get();
