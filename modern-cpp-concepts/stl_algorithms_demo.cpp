@@ -46,9 +46,30 @@ int main()
 
 
     //std::binary_search
-    std::binary_search(animal.begin(), animal.end(), "ant");   //true
+    std::cout << "\nstd::binary_search:\n";
+    std::binary_search(animals.begin(), animals.end(), "ant");   //true
+
+    std::vector<int> v = {1, 3, 5, 7};
+    std::cout << (binary_search(v.begin(), v.end(), 3) ? "Found" : "Not Found ") << std::endl; //output Found
+    std::cout << (binary_search(v.begin(), v.end(), 4) ? "Found" : "Not Found ") << std::endl; //outputs Not Found
+
 
     //std::lower_bound
+    std::cout << "\nstd::lower_bound:\n";
+
+    std::vector<int> v ={ 1, 3, 3, 5, 7};
+
+    auto it  = lower_bound (v.begin (), v.end (), 3);
+    auto it2 = lower_bound (v.begin (), v.end (), 4);
+    auto it3 = lower_bound (v.begin (), v.end (), 8);
+
+    std::cout << (it != v.end () ? std::to_string (*it) : "Not Found") << std::endl;    //outputs 3
+    std::cout << (it2 != v.end () ? std::to_string (*it2) : "Not Found") << std::endl;    //outputs 5
+    std::cout << (it3 != v.end () ? std::to_string (*it3) : "Not Found") << std::endl;    //outputs Not Found
+
+    std::cout << distance(v.begin(), it) << endl;  //outputs 1
+
+    
 
     //std::upper_bound
 
