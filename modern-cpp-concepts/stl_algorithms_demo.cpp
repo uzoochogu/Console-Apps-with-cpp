@@ -1,4 +1,10 @@
-import std.core;     //We're using this temporarily
+//import std.core;     //We're using this temporarily
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+
 
 
 /*
@@ -57,28 +63,34 @@ int main()
     std::cout << "\nstd::binary_search:\n";
 
     std::vector<int> v = {1, 3, 5, 7};
+    print(v); std::cout << std::endl;
 
-    std::cout << (binary_search(v.begin(), v.end(), 3) ? "Found" : "Not Found ") << std::endl; //output Found
-    std::cout << (binary_search(v.begin(), v.end(), 4) ? "Found" : "Not Found ") << std::endl; //outputs Not Found
+    std::cout << (binary_search(v.begin(), v.end(), 3) ? "3 Found" : "3 Not Found ") << std::endl; //output Found
+    std::cout << (binary_search(v.begin(), v.end(), 4) ? "4 Found" : "4 Not Found ") << std::endl; //outputs Not Found
 
     //using a defined binary predicate
     v = { 7, 5, 3, 1 };
-    std::cout << (binary_search(v.begin(), v.end(), 3, std::greater<int>()) ? "Found" : "Not Found ") << std::endl; //output Found
-    std::cout << (binary_search(v.begin(), v.end(), 4, std::greater<int>()) ? "Found" : "Not Found ") << std::endl; //outputs Not Found
+
+    std::cout << "\nUsing a defined binary predicate: \n"; 
+    print(v); std::cout << std::endl;
+
+    std::cout << (binary_search(v.begin(), v.end(), 3, std::greater<int>()) ? "3 Found" : "3 Not Found ") << std::endl; //output Found
+    std::cout << (binary_search(v.begin(), v.end(), 4, std::greater<int>()) ? "4 Found" : "4 Not Found ") << std::endl; //outputs Not Found
 
 
     //std::lower_bound in <algorithm>    ->std::first_greater_or_equal_to
     std::cout << "\nstd::lower_bound:\n";
 
     v ={ 1, 3, 3, 5, 7};              // used in std::lower_bound, std::upper_bound and our implemented first_lower_than()
+    print(v); std::cout << std::endl;
 
     auto it  = lower_bound (v.begin (), v.end (), 3);
     auto it2 = lower_bound (v.begin (), v.end (), 4);
     auto it3 = lower_bound (v.begin (), v.end (), 8);
 
-    std::cout << (it != v.end () ? std::to_string (*it) : "Not Found") << std::endl;    //outputs 3
-    std::cout << (it2 != v.end () ? std::to_string (*it2) : "Not Found") << std::endl;    //outputs 5
-    std::cout << (it3 != v.end () ? std::to_string (*it3) : "Not Found") << std::endl;    //outputs Not Found
+    std::cout << "Lower bound for 3: " << (it != v.end() ? std::to_string(*it) : "Not Found") << std::endl;        //outputs 3
+    std::cout << "Lower bound for 4: " << (it2 != v.end () ? std::to_string (*it2) : "Not Found") << std::endl;    //outputs 5
+    std::cout << "Lower bound for 8: " << (it3 != v.end () ? std::to_string (*it3) : "Not Found") << std::endl;    //outputs Not Found
 
     std::cout << "To verify that only the first equal value is printed, this is the distance: " 
               << distance(v.begin(), it) << std::endl;  //outputs 1
@@ -92,19 +104,20 @@ int main()
     it2 = upper_bound (v.begin (), v.end (), 4);
     it3 = upper_bound (v.begin (), v.end (), 8);
 
-    std::cout << (it != v.end () ? std::to_string (*it) : "Not Found") << std::endl;    //outputs 5
-    std::cout << (it2 != v.end () ? std::to_string (*it2) : "Not Found") << std::endl;    //outputs 5
-    std::cout << (it3 != v.end () ? std::to_string (*it3) : "Not Found") << std::endl;    //outputs Not Found
+    std::cout << "Upper bound for 3: " << (it != v.end () ? std::to_string (*it) : "Not Found") << std::endl;      //outputs 5
+    std::cout << "Upper bound for 4: " << (it2 != v.end () ? std::to_string (*it2) : "Not Found") << std::endl;    //outputs 5
+    std::cout << "Upper bound for 8: " << (it3 != v.end () ? std::to_string (*it3) : "Not Found") << std::endl;    //outputs Not Found
 
 
     //using Implemented first_less_than
+    std::cout << "\nUsing Implemented first_less_than: \n";
     it = first_less_than(v.begin(), v.end(), 3);
     it2 = first_less_than(v.begin(), v.end(), 4);
     it3 = first_less_than(v.begin(), v.end(), 8);
 
-    std::cout << (it != v.end() ? std::to_string(*it)   : "Not Found") << std::endl;    //outputs 1
-    std::cout << (it2 != v.end() ? std::to_string(*it2) : "Not Found") << std::endl;    //outputs 3
-    std::cout << (it3 != v.end() ? std::to_string(*it3) : "Not Found") << std::endl;    //outputs 7
+    std::cout << "First less than bound for 3: " << (it != v.end() ? std::to_string(*it)   : "Not Found") << std::endl;    //outputs 1
+    std::cout << "First less than bound for 4: " << (it2 != v.end() ? std::to_string(*it2) : "Not Found") << std::endl;    //outputs 3
+    std::cout << "First less than bound for 8: " << (it3 != v.end() ? std::to_string(*it3) : "Not Found") << std::endl;    //outputs 7
 
 
 
