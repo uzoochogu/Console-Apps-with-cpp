@@ -1,12 +1,11 @@
-//import std.core;     //We're using this temporarily
-
 #include <iostream>
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <unordered_set>
 
 
-
+//import std.core;     //We're using this temporarily
 /*
 * The above header file gives me experimental support for <iostream> and <memory> modules
 * It is not needed here but is used for consistency
@@ -119,13 +118,20 @@ int main()
     std::cout << "First less than bound for 4: " << (it2 != v.end() ? std::to_string(*it2) : "Not Found") << std::endl;    //outputs 3
     std::cout << "First less than bound for 8: " << (it3 != v.end() ? std::to_string(*it3) : "Not Found") << std::endl;    //outputs 7
 
+    //std::next_permutation and std::prev_permutation in <algorithm>
+    std::cout << "\nstd::next_permutation and std::prev_permutation:\n"
+              << "Valid Anagrams of \"Stop\": \n";
 
+    std::unordered_set<std::string> dictionary = { "stop", "pots", "tops", "opts", "post", "spot" };
+    std::string word{ "stop" };
 
+    std::sort(word.begin(), word.end());
 
-    
+    do
+    {
+        std::cout << word << (dictionary.count(word) ? ": IS A WORD\n" : "\n");
 
-
-   
+    } while (std::next_permutation(word.begin(), word.end()));   
 
 
     
