@@ -97,7 +97,7 @@ int main()
     
 
     //std::upper_bound in <algorithm>    ->std::first_greater_than
-    std::cout << "\nstd::lower_bound:\n";
+    std::cout << "\nstd::upper_bound:\n";
 
     it  = upper_bound (v.begin (), v.end (), 3);
     it2 = upper_bound (v.begin (), v.end (), 4);
@@ -132,6 +132,29 @@ int main()
         std::cout << word << (dictionary.count(word) ? ": IS A WORD\n" : "\n");
 
     } while (std::next_permutation(word.begin(), word.end()));   
+
+
+    //std::all_of, std::any_of and std::none_of in  <algorithm>
+    std::cout << "\nstd::all_of, std::any_of and std::none_of:\n";
+
+    std::vector<std::string> words{ "Cat", "Dog", "123" };
+
+    for (const auto& word : words)
+    {
+        std::cout << word << " is "
+                  << (std::all_of(word.begin(), word.end(), std::isdigit) ? "" : "NOT ")
+                  << "a number.\n";
+    }
+
+    //using a user defined unary predicate
+    std::cout << "\nUsing a user defined unary predicate:\n";
+
+    v = { 1, 2, 3 };
+    print(v);
+    std::cout << "Are they all odd numbers? ";
+
+    auto is_even = [](auto n) { return n % 2 == 0; };
+    std::cout << (std::none_of(v.begin(), v.end(), is_even) ? "YES\n" : "NO\n");
 
 
     
