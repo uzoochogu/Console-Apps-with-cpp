@@ -33,6 +33,32 @@ ForwardIterator first_less_than(ForwardIterator first, ForwardIterator last, T v
     return (it == first ? last : --it);                 //return end() iterator if no less than value
 }
 
+
+//adjacent_count algorithm
+template <typename FwdIt>
+auto adjacent_count(FwdIt first, FwdIt last)
+{
+    auto c = 0;
+    while (true)
+    {
+        first = std::adjacent_find(first, last);
+        if (first == last) return c;
+        ++c, ++first;
+    }
+    return c;
+}
+
+
+//Implementing count using std::reduce
+namespace my
+{
+    template<class InIt, class T>
+    auto count(InIt first, InIt last, const T& val)
+    {
+        return std::reduce(first, last, 0, [val](auto i, auto e) { return i + (e == val); });
+    }
+}
+
 int main()
 {
 
@@ -201,7 +227,40 @@ int main()
     std::cout << "set_intersection:         "; print(s4);
     std::cout << "set_difference:           "; print(s5);
     std::cout << "set_symmetric_difference: "; print(s6);
-    
+
+
+    //std::adjacent_find in <algorithm> 
+    std::cout << "\nstd::adjacent_find:\nGiven:\n";
+
+    v = { 0, 5, 2, 2, 3, 1, 4 , 4 };
+    print(v);
+
+    it = std::adjacent_find(v.begin(), v.end());
+    std::cout << "Value: " << *it << std::endl;
+    std::cout << "Index: " << distance(v.begin(), it) << std::endl;
+
+    //using a user specified binary predicate
+    std::cout << "\nUsing a user specified binary predicate (Greater) :\n";
+    it = std::adjacent_find(v.begin(), v.end(), std::greater<>());
+    std::cout << "Value: " << *it << std::endl;
+    std::cout << "Index: " << distance(v.begin(), it) << std::endl;
+
+    //adjacent_count - a user defined wrapper around adjacent_find()
+    std::cout << "\nadjacent_count - a user defined wrapper around adjacent_find():\n"
+              << "Returns number of adjacent numbers equal to each other\n";
+    std::cout << "Count: " << adjacent_count(v.begin(), v.end()) << std::endl;
+
+    //std::count and std::count_if
+    std::cout << "\nstd::count and std::count_if:\nGiven: ";
+    v = { 1, 2, 3, 1, 2};
+    print(v);
+
+    std::cout << "1 appears " << std::count(v.begin(), v.end(), 1) << " time(s)\n";  //2
+    std::cout << "3 appears " << std::count(v.begin(), v.end(), 3) << " time(s)\n";  //2
+
+    auto is_odd = [](auto e) { return e % 2 == 1; };
+    std::cout << "There are " << std::count_if(v.begin(), v.end(), is_odd) << " odd numbers in the vector\n";
+
 
 
 
