@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <unordered_set>
+#include <set>
+#include <numeric>
 
 
 //import std.core;     //We're using this temporarily
@@ -155,6 +157,58 @@ int main()
 
     auto is_even = [](auto n) { return n % 2 == 0; };
     std::cout << (std::none_of(v.begin(), v.end(), is_even) ? "YES\n" : "NO\n");
+
+
+    //std::iota in <numeric>  O(n)
+    std::cout << "\nstd::iota:\n"
+              << "Generated range from 1 is: ";
+    
+    std::vector<int> a(5), b(5), c(5);             //used in below
+    
+    std::iota(a.begin(), a.end(), 1);
+    print(a);
+
+    
+    //std::partial_sum in <numeric>  O(n)
+    std::cout << "\nstd::partial_sum:\n"
+              << "Generated partial sum for range: ";
+    print(a);
+    std::cout << "is: ";
+    std::partial_sum(a.begin(), a.end(), b.begin());    //by default plus<> ()
+    print(b);
+
+    //Specifying the operator as "Multiplication"
+    std::cout << "Specifying the operator as <multiplies> ():\n ";    
+    std::partial_sum(a.begin(), a.end(), c.begin(), std::multiplies<>());
+    print(c);
+
+    //std::set_union, std::set_intersection, std::set_difference, std::set_symmetric_difference
+    //in <algorithm> O(n) and can work with any containers
+    std::cout << "\nstd::set_union, std::set_intersection, std::set_difference, std::set_symmetric_difference:\n";
+    std::set<int> s1 = { 0, 1, 2, 3, 4, 5};
+    std::set<int> s2 = {             4, 5, 6, 7, 8, 9};
+    std::cout << "Given these sets:\n";
+    print(s1); print(s2);
+    
+    std::set<int> s3, s4, s5, s6;
+
+    std::set_union               (s1.begin(), s1.end(), s2.begin(), s2.end(), std::inserter(s3, s3.end()));
+    std::set_intersection        (s1.begin(), s1.end(), s2.begin(), s2.end(), std::inserter(s4, s4.end()));
+    std::set_difference          (s1.begin(), s1.end(), s2.begin(), s2.end(), std::inserter(s5, s5.end()));
+    std::set_symmetric_difference(s1.begin(), s1.end(), s2.begin(), s2.end(), std::inserter(s6, s6.end()));
+
+    std::cout << "set_union:                "; print(s3);
+    std::cout << "set_intersection:         "; print(s4);
+    std::cout << "set_difference:           "; print(s5);
+    std::cout << "set_symmetric_difference: "; print(s6);
+    
+
+
+
+
+
+
+
 
 
     
