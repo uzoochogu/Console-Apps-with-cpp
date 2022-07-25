@@ -250,16 +250,46 @@ int main()
               << "Returns number of adjacent numbers equal to each other\n";
     std::cout << "Count: " << adjacent_count(v.begin(), v.end()) << std::endl;
 
-    //std::count and std::count_if
+    //std::count and std::count_if in <algorithm>
     std::cout << "\nstd::count and std::count_if:\nGiven: ";
     v = { 1, 2, 3, 1, 2};
     print(v);
 
     std::cout << "1 appears " << std::count(v.begin(), v.end(), 1) << " time(s)\n";  //2
-    std::cout << "3 appears " << std::count(v.begin(), v.end(), 3) << " time(s)\n";  //2
+    std::cout << "3 appears " << std::count(v.begin(), v.end(), 3) << " time(s)\n";  //1
 
     auto is_odd = [](auto e) { return e % 2 == 1; };
     std::cout << "There are " << std::count_if(v.begin(), v.end(), is_odd) << " odd numbers in the vector\n";
+
+
+    //std::partition and std::stable_partition in <algortihm>
+    std::cout << "\nstd::partition and std::stable_partition:\nGiven: ";
+    v.resize(10);
+    std::iota(std::begin(v), std::end(v), 1);
+    print(v);
+
+    std::partition(std::begin(v), std::end(v), is_even);      //is_even was previously defined
+    std::cout << "std::partition: "; print(v);
+
+    std::iota(std::begin(v), std::end(v), 1);
+    std::stable_partition(std::begin(v), std::end(v), is_even);
+    std::cout << "std::stable_partition: "; print(v);
+
+
+    //std::remove_if in <algortihm> and idiomatic erase-remove 
+    std::cout << "\nstd::remove_if and idiomatic erase-remove\nGiven: ";
+    std::iota(std::begin(v), std::end(v), 1);
+    print(v);
+
+    std::remove_if(std::begin(v), std::end(v), is_odd);      //is_odd was previously defined
+    std::cout << "std::remove_if: "; print(v);
+
+    //idiomatic erase-remove
+    std::iota(std::begin(v), std::end(v), 1);
+    v.erase(std::remove_if(std::begin(v), std::end(v), is_odd), std::end(v));
+    std::cout << "idiomatic erase-remove: "; print(v);
+
+
 
 
 
