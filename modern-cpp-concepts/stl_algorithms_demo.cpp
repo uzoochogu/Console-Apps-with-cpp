@@ -291,11 +291,35 @@ int main()
     std::cout << "idiomatic erase-remove: "; print(v);
 
 
-    //std::generate and std::generate_n
+    //std::generate and std::generate_n in <algorithm>
     std::cout << "\nstd::generate and std::generate_n\nGenerated vector: ";
     std::vector<std::string> letters(10);
     std::generate(std::begin(letters), std::end(letters), [s = ""s, c = '`']() mutable {++c; s += c; return s; });
     print(letters);
+
+    //std:min, std::max  and std::minmax in <algorithm>
+    std::cout << "\nstd::max and std::min: \nGiven: ";
+    auto i = { 1, 2, 3 };
+    print(i);
+    std::cout << "Min: " << std::min(i) << std::endl;
+    std::cout << "Max: " << std::max(i) << "\n\nGiven: 1 , 2:\n";
+
+    //using c++17 structured bindings
+    {
+        auto [min_, max_] = std::minmax(2, 1);
+        std::cout << "Min: " << min_ << "\n";
+        std::cout << "Max: " << max_ << "\n\n";
+    }
+
+    //std::min_element, std::max_element and std::minmax_element
+    std::cout << "\nstd::min_element, std::max_element and std::minmax_element\nGiven: ";
+    print(v);
+
+    {
+        auto[min_, max_] = std::minmax_element(std::begin(v), std::end(v) );
+        std::cout << "Min: " << *min_ << "\n";
+        std::cout << "Max: " << *max_ << "\n\n";
+    }
 
 
 
