@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include <set>
 #include <numeric>
+using namespace std;
 
 
 //import std.core;     //We're using this temporarily
@@ -290,8 +291,11 @@ int main()
     std::cout << "idiomatic erase-remove: "; print(v);
 
 
-
-
+    //std::generate and std::generate_n
+    std::cout << "\nstd::generate and std::generate_n\nGenerated vector: ";
+    std::vector<std::string> letters(10);
+    std::generate(std::begin(letters), std::end(letters), [s = ""s, c = '`']() mutable {++c; s += c; return s; });
+    print(letters);
 
 
 
