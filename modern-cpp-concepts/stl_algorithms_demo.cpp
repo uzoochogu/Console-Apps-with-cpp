@@ -321,15 +321,47 @@ int main()
         std::cout << "Max: " << *max_ << "\n\n";
     }
 
+    //std::unique and std::unique_copy in <algorithm>
+    std::cout << "\nstd::unique and std::unique_copy\nGiven: ";
+    v = { 1, 2, 2, 3, 3, 1, 2, 2 }; print(v);
+
+    std::cout << "std::unique: ";
+    std::unique(std::begin(v), std::end(v));
+    print(v);
+
+    v = { 1, 2, 2, 3, 3, 1, 2, 2 };
+    std::cout << "\nstd::unique with erase-remove idiom: ";
+    v.erase(std::unique(std::begin(v), std::end(v)), std::end(v));
+    print(v);
+
+    v = { 1, 2, 2, 3, 3, 1, 2, 2 };
+    std::vector<int> u;
+    std::cout << "\nstd::unique_copy: ";
+    std::unique_copy(std::begin(v), std::end(v), std::back_inserter(u));
+    print(u);
+
+    //Specifying the Operator and using erase-remove idiom
+    v = { 1, 2, 2, 3, 3, 1, 2, 2 };
+    std::cout << "\nSpecifying the less<>() Operator and using erase-remove idiom: ";
+    v.erase(std::unique(std::begin(v), std::end(v), std::less<>()), std::end(v));
+    print(v);
 
 
 
+    //std::accumulate and std::reduce in <numeric>
+    std::cout << "\nstd::accumulate and std::reduce:\nGiven: ";
+
+    v = { 1 , 2, 3, 4 }; print(v);
+    std::cout << "\nDefault std::accumulate with init 0: " << std::accumulate(std::begin(v), std::end(v), 0);
+    std::cout << "\nMultiply specified in std::accumulate with init 1: " << std::accumulate(std::begin(v), std::end(v), 1, std::multiplies<>());
 
 
+    std::cout << "\n\nDefault std::reduce with no init: " << std::reduce(std::begin(v), std::end(v));
+    std::cout << "\nPlus specified in std::reduce with init 0: " << std::reduce(std::begin(v), std::end(v), 0, std::plus<>());
+    std::cout << "\nPlus specified in std::reduce with init 1: " << std::reduce(std::begin(v), std::end(v), 1, std::plus<>());
+    std::cout << "\nMultiply specified in std::reduce with init 1: " << std::reduce(std::begin(v), std::end(v), 1, std::multiplies<>());
 
-
-    
-
+    //pause before exit
     std::cin.get();
 
     return 0;
