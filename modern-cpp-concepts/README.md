@@ -14,6 +14,7 @@ I will start from pretty basic things from the old cpp and ramp up quickly as ti
 5. Using Aliases
 6. Constexpr variables and functions.
 7. STL Algorithms
+8. C++ Iterators
 
 
 Note: 
@@ -88,4 +89,5 @@ cmake --build .
  - [C++ Language Documentation](https://docs.microsoft.com/en-us/cpp/cpp/?view=msvc-170)
 
 11. C++ Design Patterns: Creational- LinkedIn Learning Tutorial by Olivia Chiu Stone.
+12. [code_report YouTube Channel](https://www.youtube.com/c/codereport)
 
