@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(source_files "1_abstract_base_class" "constexpr_keyword" 
                  "modern_memory_mgmt"    "the_std_format" 
                  "the_std_number"        "bitwise_operators"
-                 "stl_algorithms_demo"
+                 "stl_algorithms_demo"   "c++_iterators"
     )
 
 #executables
