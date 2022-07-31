@@ -1,5 +1,5 @@
 /*
-This program print the binary equivalent of a supplied Decimal using Backtracking
+This program prints all binary numbers that has exactly the given number of digits using backtracking
 */
 
 #include <iostream>
@@ -26,7 +26,18 @@ void printBinary(int digits, std::string prefix = "")
 
 int main()
 {
+    int digit{0};
+    char option;
 
+    do
+    {
+        std::cout << "Enter a number: ";
+        std::cin >> digit;
+        std:: cout << "\nThe Binary numbers with " << digit  << " digits are: \n";
+        printBinary(digit);
+        std:: cout << "\n\n\nDo you want to enter another digit? (y/n): ";
+        std::cin >> option;
+    } while (option == 'y');
 
     return 0;
 }
