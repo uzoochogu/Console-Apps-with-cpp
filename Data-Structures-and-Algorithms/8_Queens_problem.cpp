@@ -12,10 +12,63 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 
 class Board
 {
+public:
+    Board(int size) : m_size{size}
+    {
+        for(int i = 0; i < size; i++)
+        {
+            pieces.emplace_back();
+            for(int j =0; j < size; j++)
+            {
+                pieces[i].push_back(false);
+            }
+        }
+    };
+
+    bool isSafe(int row, int column)
+    {
+        for(int i =0; i < m_size; i++)
+        {
+            if(pieces[row + i][column] || 
+               pieces[row][column + i] || 
+               pieces[row + i][column + i])
+            {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    void place(int row, int column){ pieces[row][column] = true;};
+
+    void remove(int row, int column){ pieces[row][column] = false;};
+
+    std::string toString()
+    {
+        std::string output;
+        for(auto i : pieces) //columns
+        {
+            for(auto j : i)//rows
+            {
+                if(j)
+                    output.append("Q ");
+                else
+                    output.append("- ");
+            }
+            output += "\n"; 
+        }
+        return output;
+    };
+
+private:
+    std::vector<std::vector<bool>> pieces;
+    int m_size{0};
+
 
 };
 
@@ -35,14 +88,17 @@ void solve8QueensUtil(Board& board, int column)
         //for each possible place in this column
         for (int row = 0; row < 9; row++)
         {
-            //choose
-            board.place(row, column);
+            if(board.isSafe(row, column))
+            {
+                //choose
+                board.place(row, column);
 
-            //explore
-            solve8QueensUtil(board, column + 1);
+                //explore
+                solve8QueensUtil(board, column + 1);
 
-            //unchoose
-            board.remove(row, column);
+                //unchoose
+                board.remove(row, column);
+            }
         }
     }    
 }
@@ -60,7 +116,7 @@ void solve8Queens(Board& board)
 
 int main()
 {
-
-
+    Board b(8);
+    //solve8Queens(b);
     return 0;
 }
