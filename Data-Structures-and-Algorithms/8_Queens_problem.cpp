@@ -37,13 +37,34 @@ public:
         {
             //check across rows, columns, principal diagonal and secondary diagonal respectively.
             if(pieces[(row + i) % (m_size)][column] || 
-               pieces[row][(column + i) % (m_size)] || 
-               pieces[(row + i) % (m_size)][(column + i) % (m_size)] ||
-               pieces[(row - i + m_size) % (m_size)][(column + i) % (m_size)])
+               pieces[row][(column + i) % (m_size)] 
+            )
             {
                 return false;
             }
+        //top diagonal
+        if(row + column <= m_size-1)
+        {
+            for(int j = row + column; j < (row + column + 1); j++)
+            {
+                if(pieces[(row + i) % (m_size)][(column + i) % (m_size)] ||
+               pieces[(row - i + m_size) % (m_size)][(column + i) % (m_size)])
+            
+
+            }
+
         }
+        //bottom diagonal
+        else
+        {
+            for(int j = row + column; j < ((2 * m_size - 1) - row + column); j++)
+            {
+            
+
+            }
+        }
+
+        
         return true;
     };
 
