@@ -14,7 +14,9 @@ set(source_files "1_abstract_base_class" "constexpr_keyword"
                  "modern_memory_mgmt"    "the_std_format" 
                  "the_std_number"        "bitwise_operators"
                  "stl_algorithms_demo"   "c++_iterators"
+                 "formatter_example"
     )
+
 
 #executables
 foreach(File IN LISTS source_files)
@@ -22,6 +24,7 @@ foreach(File IN LISTS source_files)
     if (MSVC)
         target_compile_options("${File}" PRIVATE /experimental:module /EHsc /MD)
     endif()
+    target_include_directories (${File} PRIVATE ${PROJECT_SOURCE_DIR}/include)
 endforeach()
     
 
