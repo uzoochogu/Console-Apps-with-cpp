@@ -1,15 +1,19 @@
 //Testing the <format> and <limit> modules
-//import <iostream>;  //I'll use these when they are fully supported
+//import <iostream>;  //I'll use these when they are fully supported.
 //import <format>;
 
-import std.core;     //We're using this temporarily
-
+#include <iostream>
+#include <iomanip>    //for manipulators
+#include <format>     //for std::format
+#include <numbers>    //for std::numbers and  std::pi 
+#include <limits>     //for std::numeric_limits
 
 
 /*
-The above header file gives me experimental support for <iostream> and <format> modules
-I needed to use the following flags and the msvc 14.31
-'cl /std:c++20 /experimental:module /EHsc /MD the_std_format.cpp'
+* import std.core;     
+* The above module gives me experimental support for <iostream> , <limit> and <format> modules
+* I needed to use the following flags and the msvc 14.31
+* 'cl /std:c++20 /experimental:module /EHsc /MD the_std_format.cpp'
 */
 
 //A Template check for signed and unsigned types
