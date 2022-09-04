@@ -1,8 +1,11 @@
 // Using the bitwise operators
-import std.core;     //We're using this temporarily
+
+#include <iostream>
+#include <format>
 
 /*
-* The above header file gives me experimental support for <iostream> and <memory> modules
+* import std.core;     //Was used before but is now retired
+* The above header file gives me experimental support for <iostream>, <format> and <memory> modules
 * I needed to use the following flags and the msvc 14.31
 * 'cl /std:c++20 /experimental:module /EHsc /MD modern_memory_mgmt.cpp'
 */
