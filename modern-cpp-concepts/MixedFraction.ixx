@@ -1,3 +1,4 @@
+module MixedFraction;
 export module MixedFraction;
 
 class MixedFraction
