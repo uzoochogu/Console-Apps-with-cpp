@@ -19,7 +19,8 @@ I will start from pretty basic things from the old cpp and ramp up quickly as ti
 
 Note: 
 Compiling C++20 is difficult and support for modules is experimental and stressful. 
-For now GCC 11.0+ supports a lot of C++20 features but MSVC supports more features. I will expand on guide later on.
+For now GCC 11.0+ supports a lot of C++20 features but MSVC supports more features. MSVC is currently the only compiler with support for Modules in C++, due to this, I would use it here. (Updated: Sept 06, 22).
+I will expand on guide later on.
 
 
 ### Compiling C++20 code with MSVC
@@ -49,10 +50,12 @@ For example
 cl /std:c++20 /experimental:module /EHsc /MD the_std_format.cpp
 ```
 *Notes*
-1. You can use /std:latest 
-2. For VS Code fans, two very useful articles (actualy the same article) for using "Developer Command Prompt for VS 2022" as the integrated terminal are:
+1. You can use /std:latest
+2. To consume the Microsoft Standard Library modules, compile your program with `/EHsc` and `/MD` options.
+3. For VS Code fans, two very useful articles (actualy the same article) for using "Developer Command Prompt for VS 2022" as the integrated terminal are:
 - [Configure VS Code for Microsoft C++](https://code.visualstudio.com/docs/cpp/config-msvc) 
 - [Run VS Code outside the Developer Command Prompt](https://code.visualstudio.com/docs/cpp/config-msvc#_run-vs-code-outside-the-developer-command-prompt) - This configures the VS Code tasks.json file.
+4. [An Overview of Modules in C++](https://docs.microsoft.com/en-us/cpp/cpp/modules-cpp?view=msvc-170)
 
 <p>
 The simplest method which is discussed in the first part of the article is to run "Developer Command Prompt for VS 2022" program from the start menu then navigate to your project directory and run `code` command to open VS code in that working directory using the correct environment variables. You can test this terminal by runing `cl` command to check if exists in that environment.
@@ -65,12 +68,24 @@ Run CMake and configure a solution file for yourself. The previous Visual studio
 ### Generating a Solution File
 Run the Following:
 ```powershell
-cmake .
+mkdir build
+cd build
+cmake ..
 ```
 ```powershell
 cmake --build .
 ```
 
+## Excerpt on Importing Modules in MSVC
+>
+Although not specified by the C++20 standard, Microsoft makes its implementation of the C++ Standard Library importable as modules. By importing the C++ Standard Library as modules rather than including it through header files, you can potentially speed up compilation times depending on the size of your project. The library is split into the following named modules:
+>
+    `std.regex` provides the content of header `<regex>`
+    `std.filesystem` provides the content of header `<filesystem>`
+    `std.memory` provides the content of header `<memory>`
+    `std.threading` provides the contents of headers `<atomic>`, `<condition_variable>`, `<future>`, `<mutex>`, `<shared_mutex>`, and `<thread>`
+    `std.core` provides everything else in the C++ Standard Library
+>
 
 
 ## Influences and References
@@ -87,6 +102,7 @@ cmake --build .
 10. Microsoft Docs (C++)
  - [Visual Studio and C++](https://docs.microsoft.com/en-us/cpp/overview/visual-cpp-in-visual-studio?view=msvc-170)
  - [C++ Language Documentation](https://docs.microsoft.com/en-us/cpp/cpp/?view=msvc-170)
+ - [Overview of modules in C++](https://docs.microsoft.com/en-us/cpp/cpp/modules-cpp?view=msvc-170)
 
 11. C++ Design Patterns: Creational- LinkedIn Learning Tutorial by Olivia Chiu Stone.
 12. [code_report YouTube Channel](https://www.youtube.com/c/codereport)
