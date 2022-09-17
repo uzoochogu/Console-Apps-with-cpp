@@ -1,7 +1,9 @@
-module MixedFraction;
+#include <cstdio>               //if using header files, put before module export
+#include <format>
 export module MixedFraction;
 
-class MixedFraction
+
+export class MixedFraction
 {
 public:
     MixedFraction(int dividend, int divisor) 
@@ -63,23 +65,3 @@ void MixedFraction::_reduce(int& num, int& denom)
     denom = denom / divisor;
 }
 
-//Formatter Specification
-template<>
-struct std::formatter<MixedFraction>
-{
-    template<typename ParseContext>
-    constexpr auto parse(ParseContext& ctx)
-    {
-        return ctx.begin();
-    }
-
-    template<typename FormatContext>
-    auto format(const MixedFraction& mf, FormatContext& ctx)
-    {
-        if (mf.getNum() == 0)
-            return format_to(ctx.out(), "{:d}", mf.getQuotient());
-        else 
-            return format_to(ctx.out(), "{0:d} {1:d}/{2:d}", mf.getQuotient(), mf.getNum()
-            , mf.getDenom());
-    }
-};
