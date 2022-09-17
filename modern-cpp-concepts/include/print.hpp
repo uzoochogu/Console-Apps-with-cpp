@@ -14,4 +14,4 @@ void print(const std::string_view fmt_str, Args&&... args)
     fputs(outstr.c_str(), stdout);
 }
 
-#endif
+#endif /* PRINT_HPP */
